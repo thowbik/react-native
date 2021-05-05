@@ -1,0 +1,112 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-buttons slot="">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+        </ion-col>
+        <ion-col class="top-14">
+          <ion-title
+            class="ion-text-center fs-15"
+            [ngClass]="{ 'ta-font': this.languageType === 'ta' }"
+            ><b
+              >{{ this.Observation }}<br *ngIf="this.languageType == 'ta'" />
+              {{ this.Report }}</b
+            >
+          </ion-title></ion-col
+        >
+        <ion-col>
+          <app-notification></app-notification>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <app-progress [progress]="this.progressValue"></app-progress>
+
+  <div class="content-wrapper">
+    <ion-text color="" class="ion-text-center">
+      <h5 class="m-0">
+        <b
+          ><span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+            this.UpdateObservation
+          }}</span>
+          : {{ reportDate }}</b
+        >
+      </h5>
+    </ion-text>
+
+    <section *ngIf="this.improvement.length">
+      <p class="text-success">
+        <span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+          this.Congratulate
+        }}</span
+        >:
+      </p>
+
+      <ul *ngIf="improvedList.length > 0">
+        <li *ngFor="let improved of improvedList | slice: 0:2">
+          {{ improved }}
+        </li>
+      </ul>
+      <ion-text color="dark" class="text-italic">
+        <p class="fs-12">
+          <span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+            this.Note
+          }}</span>
+          : {{ this.workPreviousObservation }}
+        </p>
+      </ion-text>
+      <p class="text-danger">
+        <span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">
+          {{ this.encourage }}</span
+        >:
+      </p>
+      <ul>
+        <li *ngFor="let needimprove of needimproveList | slice: 0:2">
+          {{ needimprove }}
+        </li>
+      </ul>
+      <!-- <ion-text color="dark" class="text-italic">
+                        <p class="fs-12">Note : Teacher has not worked on the following from the previous observation</p>
+                      </ion-text> -->
+    </section>
+
+    <section *ngIf="!this.improvement.length">
+      <p
+        class="text-success"
+        [ngClass]="{ 'ta-font': this.languageType === 'ta' }"
+      >
+        {{ this.noData }}
+      </p>
+    </section>
+  </div>
+</ion-content>
+
+<ion-footer style="height: 50px; background-color: #2d9cdb;">
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button class="btn-back" (click)="goToBackPage()">
+        <ion-label
+          [ngClass]="{
+            'ta-font': this.languageType === 'ta',
+            'fs-16': this.languageType === 'ta'
+          }"
+          >{{ this.back }}</ion-label
+        >
+      </ion-tab-button>
+      <ion-tab-button class="btn-next submit" (click)="openDiscussModal()">
+        <ion-label
+          [ngClass]="{
+            'ta-font': this.languageType === 'ta',
+            'fs-16': this.languageType === 'ta'
+          }"
+          >{{ this.submitObservation }}</ion-label
+        >
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-footer>

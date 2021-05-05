@@ -1,0 +1,18 @@
+{
+  "android": {
+    "debug": {
+      "keystore": "tnschools.jks",
+      "storePassword": "tnschools",
+      "alias": "my-alias",
+      "password" : "tnschools",
+      "keystoreType": ""
+    },
+    "release": {
+      "keystore": "tnschools.jks",
+      "storePassword": "tnschools",
+      "alias": "my-alias",
+      "password" : "tnschools",
+      "keystoreType": ""
+    }
+  }
+}

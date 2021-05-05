@@ -1,0 +1,52 @@
+ion-row{
+    color:black;
+}
+p{
+    color:black;
+}
+.even{
+    // color:black;
+    // border:1px solid gray;
+    border-radius: 20px;
+    // margin-top:50px;
+}
+odd{
+    color:blue;
+}
+ion-card{
+    color:#fff;
+    background-color:#fff;
+    // padding: 7px 12px !important;
+    border-radius: 5px;
+    // margin-left: 5px;
+    // margin-right: 0px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    // padding: 5px;
+    // margin:0px;
+    // -webkit-box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2) !important;
+    // box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2) !important;
+}
+.new-background-color{
+    --background: #3880ff;
+    --color: #fff;
+}
+.ion-contentbg{
+    --background: #eeeeee91;
+}
+.class_even{
+    background-color: white;
+}
+.class_odd{
+    background-color:azure;
+}
+.sec_odd{
+    background-color: #802ac1;
+    padding:3px;
+    font-weight: bold
+}
+.sec_even{
+    background-color: #3ca5bd;
+    padding: 3px;
+    font-weight: bold;
+}

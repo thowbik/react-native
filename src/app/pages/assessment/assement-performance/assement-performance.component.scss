@@ -1,0 +1,22 @@
+.active {
+    display: block
+ }
+
+ .inactive {
+    display: none;
+ }
+.header-accordion{
+    margin: 0;
+    background: #F2C94C;
+font-family: Arial;
+font-style: normal;
+font-weight: bold;
+font-size: 18px;
+line-height: 23px;
+/* identical to box height */
+color: #FFFFFF;
+height: 35px;
+display: flex;
+align-items: center;
+justify-content: center;
+}

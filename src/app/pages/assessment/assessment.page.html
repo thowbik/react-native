@@ -1,0 +1,134 @@
+<ion-header>
+  <ion-toolbar class="pale-nave_blue">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-buttons slot="">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+        </ion-col>
+        <ion-col class="top-12">
+          <ion-title
+            class="ion-text-center fs-15"
+            [ngClass]="{'ta-font': this.languageType === 'ta'}"
+          >
+            <b>{{this.studentAsessment}}</b>
+          </ion-title>
+        </ion-col>
+        <ion-col>
+          <app-notification></app-notification>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="">
+  <app-progress [progress]="this.progressValue"></app-progress>
+
+  <div class="content-wrapper">
+    <ion-text color="dark" class="text-italic">
+      <p
+        class="fs-12 color-lgrey"
+        [ngClass]="{'ta-font': this.languageType === 'ta','fs-12': this.languageType === 'ta'}"
+      >
+        {{this.assessment_Info}}
+      </p>
+    </ion-text>
+    <h5 class="color-dgrey">
+      <span
+        [ngClass]="{'ta-font': this.languageType === 'ta','fs-16': this.languageType === 'ta'}"
+        >{{this.proceedAssess}}</span
+      >:
+      <b
+        ><span
+          [ngClass]="{'ta-font': this.languageType === 'ta','fs-16': this.languageType === 'ta'}"
+          >{{this.standard}}</span
+        >
+        {{classDetail.class_id}}</b
+      >
+    </h5>
+    <h5 class="color-dgrey">
+      <span
+        [ngClass]="{'ta-font': this.languageType === 'ta','fs-16': this.languageType === 'ta'}"
+        >{{this.subject}}</span
+      >: <b>{{classDetail.subjectInfo.subject}}</b>
+    </h5>
+
+    <ion-list lines="none">
+      <ion-item class="border">
+        <ion-label>{{ this.selectTerm }}</ion-label>
+        <ion-select
+          [(ngModel)]="selectedTerm"
+          (ngModelChange)="mySelectHandler($event)"
+        >
+          <ion-select-option *ngFor="let data of termList" [value]="data.id"
+            >{{data.term}}</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="border">
+        <ion-label> {{ this.SelectUnit }} </ion-label>
+        <ion-select
+          [(ngModel)]="selectedChapter"
+          (ngModelChange)="mySelectHandlerChapter($event)"
+          *ngIf="chapterList.length else nochapter "
+        >
+          <ion-select-option
+            *ngFor="let data of chapterList"
+            [value]="data.chapter_id"
+            >{{data.chapter_name}}
+          </ion-select-option>
+        </ion-select>
+        <ng-template #nochapter>
+          <ion-select-option value="" disabled selected
+            >{{this.noUnit}}</ion-select-option
+          >
+        </ng-template>
+      </ion-item>
+    </ion-list>
+
+    <ion-text color="dark" class="ion-text-center">
+      <p class="color-lgrey">{{this.testingStudents}} :</p>
+    </ion-text>
+
+    <ion-text *ngIf="showUnit" color="dark" class="">
+      <p class="color-lgrey">
+        <span [ngClass]="{'ta-font': this.languageType === 'ta'}"
+          >{{this.Unit}}</span
+        >: <b>{{unitInfo.chapter_no}}</b>
+      </p>
+      <p class="color-lgrey">
+        <span [ngClass]="{'ta-font': this.languageType === 'ta'}"
+          >{{this.learningOutcome}}</span
+        >
+        : <br />
+        <b>{{unitInfo.learning_outcome}}</b>
+      </p>
+    </ion-text>
+  </div>
+</ion-content>
+
+<ion-footer style="height: 50px;">
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button class="btn-back" (click)="backPage()">
+        <ion-label
+          [ngClass]="{'ta-font': this.languageType === 'ta','fs-16': this.languageType === 'ta'}"
+          >{{this.back}}
+        </ion-label>
+      </ion-tab-button>
+      <ion-tab-button
+        class="btn-next"
+        [disabled]="btnDisabled"
+        (click)="goToStudentAssessmentPage()"
+      >
+        <ion-label
+          [ngClass]="{'ta-font': this.languageType === 'ta','fs-16': this.languageType === 'ta'}"
+          >{{this.next}}
+        </ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-footer>

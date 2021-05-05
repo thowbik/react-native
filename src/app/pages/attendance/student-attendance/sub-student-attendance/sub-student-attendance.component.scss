@@ -1,0 +1,29 @@
+button.student-present{
+    background: #43A047;  
+    color: #ffffff;
+    border-radius: 50%;
+    text-align: center;
+    width: 24px;
+    height: 24px;  
+    font-weight: bold; 
+    margin-bottom: 0;
+    border:none;
+    outline:none;
+}
+button.student-absent{
+    background: #F44537;
+    color: #ffffff;
+    border-radius: 50%;
+    text-align: center;
+    width: 24px;
+    height: 24px;  
+    font-weight: bold;
+    margin-bottom: 0;
+    border:none;
+    outline:none;
+}
+
+.sc-ion-label-md-h{
+    padding-left: 1rem;
+    display: block;
+  }

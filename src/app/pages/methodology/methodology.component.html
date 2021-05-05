@@ -1,0 +1,99 @@
+<ion-header id="headersize">
+  <ion-toolbar class="new-background-color">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-buttons slot="">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+        </ion-col>
+        <ion-col class="ion-text-center">
+          <ion-title
+            class="ion-text-center"
+            [ngClass]="{ 'ta-font': this.languageType === 'ta' }"
+          >
+            <b>{{ this.teaching }}<br />{{ this.methodology }} <br /> </b>
+          </ion-title>
+        </ion-col>
+        <ion-col>
+          <app-notification></app-notification>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="content_size">
+  <app-progress
+    id="progress_size"
+    [progress]="this.progressValue"
+  ></app-progress>
+  <div class="p-0">
+    <section
+      class="p-0 section-1 border"
+      *ngFor="let methodology of sectionList; let i = index"
+    >
+      <ng-container *ngIf="methodology.questionList">
+        <ng-container *ngIf="methodology.questionList.length > 0">
+          <ion-img
+            class="ion-check-img"
+            [ngClass]="
+              this.headerClicked && methodology.isAnswerd
+                ? 'active'
+                : 'inactive'
+            "
+            src="./assets/img/checkmark.png"
+          ></ion-img>
+          <h2
+            id="sectionHeight"
+            [ngClass]="
+              this.headerClicked && methodology.status != 'active'
+                ? 'inact'
+                : ''
+            "
+            [ngStyle]="{ 'background-color': methodology.sec_header_color }"
+            class="method-header-one text-white text-center"
+          >
+            {{ methodology.sec_name }}
+          </h2>
+
+          <div
+            [ngClass]="methodology.status"
+            [ngStyle]="{ 'background-color': methodology.sec_color }"
+            class="method-body h-100"
+          >
+            <app-questions
+              [treeData]="methodology.questionList"
+              (valueChange)="displayCounter($event)"
+            ></app-questions>
+          </div>
+        </ng-container>
+      </ng-container>
+    </section>
+  </div>
+</ion-content>
+
+<ion-footer style="height: 50px;" id="footersize">
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button class="btn-back" (click)="backIndex()">
+        <ion-label
+          [ngClass]="{
+            'ta-font': this.languageType === 'ta',
+            'fs-16': this.languageType === 'ta'
+          }"
+          >{{ back }}
+        </ion-label>
+      </ion-tab-button>
+      <ion-tab-button class="btn-next" (click)="moveIndex()">
+        <ion-label
+          [ngClass]="{
+            'ta-font': this.languageType === 'ta',
+            'fs-16': this.languageType === 'ta'
+          }"
+          >{{ next }}
+        </ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-footer>

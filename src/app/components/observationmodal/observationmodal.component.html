@@ -1,0 +1,66 @@
+<ion-content>
+  <div class="modalcontent-wrapper">
+    <ion-text color="" class="ion-text-center pt-2">
+      <p>
+        <span
+          [ngClass]="{
+            'ta-font': this.languageType === 'ta',
+            'fs-9': this.languageType === 'ta'
+          }"
+          >{{ this.didDiscuss }}</span
+        >
+        <b> {{ teacherDetails.teacher_name }} ?</b>
+      </p>
+    </ion-text>
+    <div class="text-center">
+      <ion-button
+        class="btn_modal-cancel"
+        (click)="addClass(); showTextarea = true"
+        [ngClass]="{
+          'ta-font': this.languageType === 'ta',
+          'fs-10': this.languageType === 'ta'
+        }"
+        >{{ this.no }}</ion-button
+      >
+      <ion-button
+        class="btn_modal-success"
+        (click)="dismiss('yes'); showTextarea = false"
+        [ngClass]="{
+          'ta-font': this.languageType === 'ta',
+          'fs-10': this.languageType === 'ta'
+        }"
+        >{{ this.yes }}</ion-button
+      >
+    </div>
+    <div *ngIf="showTextarea" class="text-center">
+      <ion-item>
+        <ion-textarea
+          placeholder="Reason for not discussing"
+          class="ion_text-area"
+          #reason
+        ></ion-textarea>
+      </ion-item>
+      <p
+        *ngIf="submitted"
+        class="error"
+        [ngClass]="{
+          'ta-font': this.languageType === 'ta',
+          'fs-10': this.languageType === 'ta'
+        }"
+      >
+        {{ this.giveReason }}
+      </p>
+
+      <ion-button
+        color="primary"
+        (click)="dismiss('no', reason)"
+        class="br-30"
+        [ngClass]="{
+          'ta-font': this.languageType === 'ta',
+          'fs-12': this.languageType === 'ta'
+        }"
+        ><b>{{ this.submit }}</b></ion-button
+      >
+    </div>
+  </div>
+</ion-content>

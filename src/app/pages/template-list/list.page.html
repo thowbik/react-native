@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-buttons slot="start">
+     <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Template List
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <ion-list>
+    <ion-item *ngFor="let item of items">
+      <ion-icon [name]="item.icon" slot="start"></ion-icon>
+      {{item.title}}
+      <div class="item-note" slot="end">
+        {{item.note}}
+      </div>
+    </ion-item>
+  </ion-list> -->
+
+  <ion-list>
+    <ion-item *ngFor="let item of template_list;let i=index" (click)="navigate(item)">
+      <!-- <ion-icon [name]="item.icon" slot="start"></ion-icon> -->
+      <h5 slot="start">{{i+1}}</h5>
+     <ion-label> {{item.template_name}}</ion-label>
+      <!-- <div class="item-note" slot="end">
+        {{item.note}}
+      </div> -->
+    </ion-item>
+  </ion-list>
+  <!--
+    <div *ngIf="selectedItem" padding>
+      You navigated here from <b>{{selectedItem.title }}</b>
+    </div>
+  -->
+</ion-content>

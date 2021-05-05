@@ -1,0 +1,180 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-buttons slot="">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+        </ion-col>
+        <ion-col class="t-8" (click)="quickNavigation()">
+          <ion-title
+            class="ion-text-center"
+            [ngClass]="{ 'ta-font': this.languageType === 'ta' }"
+            ><b>{{ this.welcome }}</b>
+          </ion-title>
+        </ion-col>
+        <ion-col>
+          <app-notification></app-notification>
+          <!-- <ion-icon name="notifications" class="notification-icon"></ion-icon> -->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="content-wrapper">
+    <ion-text color="dark" class="ion-text-center position-relative">
+      <h2 class="color-dgrey mt-0">
+        <b
+          ><span
+            [ngClass]="{
+              'ta-font': this.languageType === 'ta',
+              'fs-25': this.languageType === 'ta',
+              'fs-30': this.languageType === 'en'
+            }"
+            >{{ this.greetings }}</span
+          >!</b
+        >
+      </h2>
+      <!-- <h2  class="ta-font">{{this.welcome}}</h2> -->
+      <p
+        class="color-dgrey fs-12"
+        [ngClass]="{ 'ta-font': this.languageType === 'ta' }"
+      >
+        <b>{{ this.observationTarget }}:</b>
+      </p>
+      <div class="img-schools">
+        <ion-progress-bar
+          color="warning rounded-pill"
+          value="{{ observedSchool }}"
+          class="border-radius h-8"
+        >
+        </ion-progress-bar>
+      </div>
+      <p class="fs-12 width-70">
+        <span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+          this.schoolsVisited
+        }}</span>
+        :
+        <b
+          >{{ observedDetails?.schools_visited }} /
+          {{ targetDetails?.schoolTarget.target_value }}</b
+        >
+      </p>
+    </ion-text>
+    <ion-text color="dark" class="ion-text-center position-relative">
+      <p
+        class="color-dgrey fs-12 margin-top-10"
+        [ngClass]="{ 'ta-font': this.languageType === 'ta' }"
+      >
+        <b>{{ this.teachersTarget }}:</b>
+      </p>
+      <div class="img-teacher">
+        <ion-progress-bar
+          color="success rounded-pill"
+          value="{{ observedTeacher }}"
+          class="border-radius h-8"
+        >
+        </ion-progress-bar>
+      </div>
+      <!-- <div class="img-teacher"> <ion-img width="80" height="80" src='../assets/icon/icons-teacher.png'></ion-img></div> -->
+
+      <p class="fs-12 width-70">
+        <span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+          this.teachersObserved
+        }}</span
+        >:
+        <b
+          >{{ observedDetails?.teachers_observed }} /
+          {{ targetDetails?.teacherTarget.target_value }}</b
+        >
+      </p>
+    </ion-text>
+    <ion-text color="dark" class="ion-text-center">
+      <p class="color-dgrey mt-5">
+        <span
+          [ngClass]="{
+            'ta-font': this.languageType === 'ta',
+            'fs-14': this.languageType === 'ta',
+            'fs-18': this.languageType === 'ta'
+          }"
+        >
+          {{ this.observedOn }} </span
+        >:<br /><b> {{ currentDate !== "" ? currentDate : "NONE" }}</b>
+      </p>
+    </ion-text>
+    <ion-list lines="none" class="p-0">
+      <p
+        class="text-center mb-0"
+        [ngClass]="{
+          'ta-font': this.languageType === 'ta',
+          'fs-14': this.languageType === 'ta'
+        }"
+      >
+        <b>{{ this.classroomObservation }}:</b>
+      </p>
+
+      <ion-item *ngIf="pageMoved != 'yes'" class="border">
+        <ion-label>{{ this.chooseSchool }}</ion-label>
+        <ion-select
+          [(ngModel)]="sSchool"
+          (ngModelChange)="mySelectHandler($event, sSchool)"
+          *ngIf="unVisitedSchoolList.length; else noFound"
+        >
+          <!-- <ion-select-option [value]="undefined" disabled selected>{{this.chooseSchool}}</ion-select-option> -->
+          <ion-select-option
+            *ngFor="let school of unVisitedSchoolList"
+            [value]="school.school_id"
+            >{{ school.school_name }}</ion-select-option
+          >
+          <ion-select-option
+            [value]="'none'"
+            [ngClass]="{ 'ta-font': this.languageType === 'ta' }"
+            >{{ this.noneAbove }}</ion-select-option
+          >
+        </ion-select>
+        <ng-template #noFound>
+          <ion-select-option value="">{{ this.noSchool }}</ion-select-option>
+        </ng-template>
+      </ion-item>
+
+      <ion-item *ngIf="pageMoved == 'yes'">
+        <div class="text-center m-auto">
+          <p class="mb-3">{{ selectedSchool.school_name }}</p>
+          <div class="progressData-outer position-relative">
+            <div
+              class="progressData-inner"
+              [style.width.%]="currentPercentage"
+            ></div>
+            <p class="percentageData-value">
+              {{ currentPercentage }}%
+              <span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+                this.completed
+              }}</span>
+            </p>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <ion-text color="dark" class="text-italic text-center text-violet">
+      <p class="pt-3 mb-0">“{{ todayQuotes?.quotes }}”</p>
+    </ion-text>
+  </div>
+</ion-content>
+<ion-footer
+  style="height: 50px; background-color: #27ae60;"
+  (click)="goToEmiVerify()"
+>
+  <p
+    style="text-align: center; color: white; padding-top: 8px;"
+    [ngClass]="{
+      'ta-font': this.languageType === 'ta',
+      'fs-16': this.languageType === 'ta',
+      'fs-25': this.languageType === 'en'
+    }"
+  >
+    {{ pageMoved == "yes" ? this.continue : this.start }}
+  </p>
+</ion-footer>

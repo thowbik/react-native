@@ -1,0 +1,77 @@
+<ion-content>
+  <div class="modalcontent-wrapper">
+    <ion-text *ngIf="viewName!='refer'" color="" class="ion-text-center pt-2">
+      <p><b> {{studentDetail?.name}}</b></p>
+    </ion-text>
+
+    <div *ngIf="viewName=='view1'">
+      <ion-list lines="none">
+        <ion-radio-group>
+          <ion-list-header>
+            <ion-label [ngClass]="{'ta-font': this.languageType === 'ta'}">{{this.ReasonAssessing}}: </ion-label>
+          </ion-list-header>
+
+          <ion-item *ngFor="let reasonInfo of reasonList;let i = index">
+            <ion-label class="radio-btn-label fs-12"> {{reasonInfo.reason}}</ion-label>
+            <ion-radio class="radio-btn" slot="start" value={{reasonInfo.reason}}
+              (ionSelect)="selectReason(reasonInfo,i)"></ion-radio>
+          </ion-item>
+
+        </ion-radio-group>
+
+      </ion-list>
+    </div>
+
+
+    <!---MEDIUM OF INSTURCTION-->
+
+
+    <div *ngIf="viewName=='view2'" class="mb-3">
+      <ion-text color="" class="ion-text-center pt-2">
+        <p [ngClass]="{'ta-font': this.languageType === 'ta'}">{{this.selectInstruction}} :</p>
+      </ion-text>
+
+      <ion-item class="border">
+        <!-- <div class="select_box"> -->
+        <ion-label>{{ this.chooseMedium }}</ion-label>
+        <ion-select ngModel (ngModelChange)="mySelectHandler($event,i)">
+          <!-- <ion-select-option value="" disabled selected hidden>{{this.chooseMedium}}</ion-select-option> -->
+          <ion-select-option *ngFor="let data of mediumList" [value]="data">{{data.medium}}</ion-select-option>
+        </ion-select>
+        <!-- </div> -->
+      </ion-item>
+    </div>
+
+
+
+    <!---->
+
+
+
+
+    <!--REFER-->
+    <div *ngIf="viewName=='refer'" class="mb-3">
+      <ion-text color="" class="ion-text-center pt-2">
+        <p [ngClass]="{'ta-font': this.languageType === 'ta'}">{{this.studentIdentify}}:</p>
+      </ion-text>
+      <div class="text-center">
+        <p *ngFor="let question of randomQuestionList;let i =index" class="mb-0"> Q{{i+1}}, {{question.ans}} </p>
+
+        <ion-button color="primary" class="btn_modal-cancel" (click)="dismiss()"
+          [ngClass]="{'ta-font': this.languageType === 'ta'}">{{this.ok}}</ion-button>
+      </div>
+    </div>
+
+
+
+
+    <div *ngIf="viewName!='refer'" class="d-flex justify-content-center">
+      <ion-button class="btn_modal-cancel" (click)="dismiss('Cancel')"
+        [ngClass]="{'ta-font': this.languageType === 'ta','fs-11': this.languageType === 'ta','modal-btn-w-50': this.languageType === 'ta'}">
+        {{this.cancel}}</ion-button>
+      <ion-button class="btn_modal-success" (click)="dismiss('Submit')"
+        [ngClass]="{'ta-font': this.languageType === 'ta','fs-11': this.languageType === 'ta','modal-btn-w-50': this.languageType === 'ta'}">
+        {{this.submit}}</ion-button>
+    </div>
+  </div>
+</ion-content>

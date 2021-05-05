@@ -1,0 +1,261 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <!-- <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons> -->
+    <!-- <ion-back-button ></ion-back-button> -->
+    <ion-buttons slot="start">
+        <!-- <ion-menu-button></ion-menu-button> -->
+       <ion-back-button ></ion-back-button>
+      </ion-buttons>
+    <ion-title>
+      School Selection
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-contentbg">
+  <ion-card style="padding: 12px !important;">
+      <form [formGroup]="school_selection_form">
+          <!-- <ion-list> -->
+              <!-- <ion-item>
+                <ion-label position="floating">District 
+                  </ion-label>
+                  <ionic-selectable
+                  formControlName="district"
+                  itemValueField="id"
+                  itemTextField="name"
+                 [items]="districtData"
+                 [canSearch]="true"
+                 (onChange)="on()">
+               </ionic-selectable>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Block</ion-label>
+                <ionic-selectable
+                formControlName="block"
+                itemValueField="id"
+                itemTextField="name"
+               [items]="blockData"
+               [canSearch]="true"
+               (onChange)="on()">
+             </ionic-selectable>
+              </ion-item>
+           
+                <ion-item>
+                    <ion-label position="floating">School
+                      </ion-label>
+                      <ionic-selectable
+                      formControlName="school"
+                      itemValueField="id"
+                      itemTextField="name"
+                     [items]="schoolData"
+                     [canSearch]="true"
+                     (onChange)="dd()">
+                   </ionic-selectable>
+                  </ion-item> -->
+                  <!-- <ion-item>
+                    <ion-label position="stacked">UDISE ID</ion-label>
+                    <ion-input></ion-input>
+                  </ion-item>  -->
+            <!-- </ion-list> -->
+               <!-- <ion-item>
+                  <ion-label position="stacked">Cluster
+                    </ion-label>
+                  <ion-select placeholder="Select  ">
+                    <ion-select-option value="f">Chennai</ion-select-option>
+                    <ion-select-option value="m">Madurai</ion-select-option>
+                  </ion-select>
+                </ion-item> -->
+                <!-- <ion-list  >
+                    <ion-radio-group formControlName="search_option"  (ionSelect)="SelectedOption($event.target.value)">
+                      <ion-list-header>
+                        <ion-label >Select the Option to Find the School</ion-label>
+                      </ion-list-header>
+                   
+                      <ion-item *ngFor="let item of searchOption">
+                        <ion-label text-wrap>{{item.name}}</ion-label>
+                        <ion-radio slot="start" value="{{item.value}}"></ion-radio>
+                      </ion-item>
+                    </ion-radio-group>
+                    </ion-list><br/> -->
+                       <!-- {{radio.get('answer_key').value | json}} -->
+                       
+                       <ion-item *ngIf="school_selection_form.controls['block']">
+                          <ion-label position="floating">Block</ion-label>
+                          <ionic-selectable
+                          formControlName="block"
+                          itemValueField="block_id"
+                          itemTextField="block_name"
+                         [items]="blockList"
+                         [canSearch]="true"
+                         searchFailText="Nothing found :("
+                         (onChange)="reset_School_info();getSchools();SelectedOption('School Name')">
+                       
+                       </ionic-selectable>
+                      </ion-item>
+                      <div *ngIf="school_selection_form.value.block != ''">
+                       <!-- <br/>
+                       <ion-label>Search School by</ion-label><br/><br/>
+                       <span *ngFor="let item of searchOption" >
+                       <ion-chip (click)="SelectedOption($event.target.innerText)" color="tertiary" >
+                          <ion-icon  name="search" color="tertiary"></ion-icon>
+                        <ion-label name="lab" color="tertiary">{{item.name}}</ion-label>
+                      </ion-chip>
+                    </span><br/> -->
+                      
+                    <ion-item *ngIf="school_selection_form.controls['school_search']">
+                        <ion-label position="floating">Search By School Name</ion-label>
+                        <ionic-selectable
+                        formControlName="school_search"
+                        itemValueField="school_id"
+                        itemTextField="school_name"
+                       [items]="curr_school"
+                       [canSearch]="true"
+                       searchFailText="Nothing found :("
+                       (onChange)="reset_School_info()">
+                     
+                     </ionic-selectable>
+                    </ion-item><br/>
+                    <ion-button *ngIf="school_selection_form.controls['school_search']" float-right color="tertiary" icon-only (click)="getValueOfSchool(school_selection_form.value.school_search,school_name,'click')">Get Details <ion-icon name="sync"></ion-icon></ion-button>
+                    
+                    <ion-item *ngIf="school_selection_form.controls['id_search']" >
+                        <ion-label position="floating">Enter the UDISE ID</ion-label>
+                        <ion-input formControlName="id_search" type="number"></ion-input>
+                      </ion-item>
+                      <ion-button *ngIf="school_selection_form.controls['id_search']" float-right color="tertiary" icon-only (click)="getValueOfSchool(school_selection_form.value.id_search,'udise_code','click')">Get Details <ion-icon name="sync"></ion-icon></ion-button>
+                      <!-- <ion-item > -->
+                        <ion-button *ngIf="school_selection_form.controls['search_option'].value == 'Location'" float-right color="tertiary" shape="round"><ion-icon name="locate"></ion-icon>Locate</ion-button>
+                      </div>
+                      <!-- </ion-item> -->
+                      <!-- <ion-searchbar></ion-searchbar> -->
+                      
+                   
+                      
+      </form>
+  </ion-card>
+  <ion-card  *ngIf="school_info != ''" class="card_school">
+    <ion-row>
+      <ion-col class="label">
+         <p> School Name</p>
+  </ion-col>
+  <ion-col class="value">
+     <p> {{school_info.school_name}}</p>
+  </ion-col>
+  </ion-row>
+
+  <ion-row>
+      <ion-col class="label">
+         <p> Block Name</p>  
+  </ion-col>
+  <ion-col class="value">
+     <p> {{school_info.block_name}}</p>
+  </ion-col>
+  </ion-row>
+
+  <ion-row>
+      <ion-col class="label">
+         <p>District Name</p>
+  </ion-col>
+  <ion-col class="value">
+     <p> {{school_info.district_name}}</p>
+  </ion-col>
+  </ion-row>
+  <ion-row>
+      <ion-col class="label">
+         <p> School Type</p>
+  </ion-col>
+  <ion-col class="value">
+     <p> {{school_info.school_type}}</p>
+  </ion-col>
+  </ion-row>
+
+  <ion-row>
+      <ion-col class="label">
+         <p> Category</p>
+  </ion-col>
+  <ion-col class="value">
+     <p> {{school_info.category}}</p>
+  </ion-col>
+  </ion-row>
+
+  <ion-row>
+      <ion-col class="label">
+         <p> Management</p>
+  </ion-col>
+  <ion-col class="value">
+     <p> {{school_info.management}}</p>
+  </ion-col>
+  </ion-row>
+
+  <ion-row>
+      <ion-col class="label">
+         <p> Total Teaching Staff</p>
+  </ion-col>
+  <ion-col class="value">
+     <p> {{school_info.teach_tot}}</p>
+  </ion-col>
+  </ion-row>
+
+  <ion-row>
+      <ion-col class="label">
+         <p>Total Boys</p>
+  </ion-col>
+  <ion-col class="value">
+     <p> {{school_info.total_b}}</p>
+  </ion-col>
+  </ion-row>
+
+  <ion-row>
+      <ion-col class="label">
+         <p>Total Girls</p>
+   
+  </ion-col>
+  <ion-col class="value">
+     <p> {{school_info.total_g}}</p>
+  </ion-col>
+  </ion-row>
+  
+  <ion-row *ngIf="school_info.total_t != '0'">
+      <ion-col class="label">
+         <p> Total Transgender</p>
+   
+  </ion-col>
+  <ion-col class="value">
+     <p> {{school_info.total_t}}</p>
+  </ion-col>
+  </ion-row>
+
+  <ion-row >
+      <ion-col class="label">
+         <p>UDISE Code</p>
+   
+  </ion-col>
+  <ion-col class="value">
+     <p> {{school_info.udise_code}}</p>
+  </ion-col>
+  </ion-row>
+
+  
+  
+    <!-- <h4 class="label_school">Block Name :{{school_info.block_name}}</h4> -->
+    <!-- <h4 class="label_school">District Name :{{school_info.district_name}}</h4>
+    <h4 class="label_school">School Type :{{school_info.school_type}} </h4>
+    <h4 class="label_school">Category :{{school_info.category}}</h4>
+    <h4 class="label_school">UDISE Code :{{school_info.udise_code}}</h4> -->
+    
+  </ion-card>
+  <!-- <ion-card>
+    <ion-label>School Name :</ion-label><br/>
+    <ion-label>District :</ion-label>
+  </ion-card> -->
+</ion-content>
+<ion-footer class="foot" >
+    <!-- <ion-row>
+      <ion-col col-12 style="padding: 0px;">
+          <ion-button size="default" routerLink="/classroom-type" routerDirection="forward" class="login_button" router>Continue</ion-button>
+      </ion-col>
+    </ion-row> -->
+    <!-- <ion-buttons slot="end"> -->
+    <ion-button size="default" shape="round" expand="full" (click)="onSubmit()" class="login_button" router [disabled]="!school_selection_form.valid || school_info == ''">Next<ion-icon name="arrow-forward"></ion-icon></ion-button>
+  <!-- </ion-buttons> -->
+  </ion-footer>

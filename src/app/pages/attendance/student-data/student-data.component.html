@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar class="pale-nave_blue">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-buttons slot="">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+        </ion-col>
+        <ion-col class="top-12">
+          <ion-title class="ion-text-center" [ngClass]="{'ta-font': this.languageType === 'ta'}">
+            <b>{{this.Attendance}}<br> {{this.Verification}}</b>
+          </ion-title>
+        </ion-col>
+        <ion-col>
+          <ion-icon name="notifications" class="notification-icon"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="">
+
+  <!--ITEM 1 START----------------------------------------------------->
+  <ion-text color="dark" class="text-italic">
+    <p class="fs-12 p-2"><span [ngClass]="{'ta-font': this.languageType === 'ta'}">{{this.Note}}</span> : <span
+        [ngClass]="{'ta-font': this.languageType === 'ta'}">{{this.mismatchInfo}}</span>.</p>
+  </ion-text>
+  <!-- List of Text Items -->
+  <ion-row *ngFor="let studentData of misMatchAttendance;let i = index" class="mt-2"
+    [ngClass]="studentData.reasonInfo == ''? 'color-lpink':'color-lgreen'">
+    <ion-col (click)="presentModal(studentData.name, i)">
+      <ion-label class="color-dgrey"><b>{{studentData.name}}</b> :</ion-label>
+      <p class="mb-0 fs-12 text-center color-blue">
+        {{studentData.reasonInfo == ''? this.reasonMismatch :studentData.reasonInfo }}</p>
+    </ion-col>
+  </ion-row>
+  <!--ITEM 1 END-------------------------------------------->
+</ion-content>
+
+<ion-footer style="height:50px;">
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button class="btn-back" (click)="goToObservation()">
+        <ion-label [ngClass]="{'ta-font': this.languageType === 'ta','fs-16': this.languageType === 'ta'}">{{this.back}}
+        </ion-label>
+      </ion-tab-button>
+      <ion-tab-button class="btn-next" (click)="goToAttendanceVerify()">
+        <ion-label [ngClass]="{'ta-font': this.languageType === 'ta','fs-16': this.languageType === 'ta'}">{{this.next}}
+        </ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-footer>

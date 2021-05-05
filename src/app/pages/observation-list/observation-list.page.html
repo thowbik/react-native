@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
+    <ion-title>Observation List</ion-title>
+  </ion-toolbar>
+ 
+</ion-header>
+
+<ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="Pull to refresh"
+          refreshingSpinner="circles"
+          refreshingText="Refreshing...">
+        </ion-refresher-content>
+      </ion-refresher>
+  <ion-list style="position: relative;bottom:3px;">
+    <!-- <ion-list-header>
+      <ion-text color="tertiary"> <h6>Saved List</h6></ion-text>
+    </ion-list-header> -->
+
+      <!-- FOR LOCAL LIST -->
+      <div *ngIf="local_list_data.length > 0">
+    <ion-item *ngFor="let data of local_list_data;let index=index"> 
+        <!-- <h6 slot="start">{{data.class}}<span *ngIf="data.section">'{{data.section.toUpperCase()}}'</span></h6> -->
+        <ion-icon slot="start" name="cloud-upload" style="color:orange"></ion-icon>
+      
+        <ion-label text-wrap>
+          <h2 >
+            <ion-col>{{data.school_name}}</ion-col></h2>
+          <h3><ion-col size=30>{{data.block_name}},{{data.district_name}}</ion-col>|
+            <ion-col style="color:orange;font-size:14px;">Not Synced</ion-col></h3>
+       
+        </ion-label>
+      </ion-item>
+    </div>
+
+      <!-- FOR SAVED LIST -->
+    <ion-item *ngFor="let data of observation_list_data;let index=index"> 
+      <!-- <h6 slot="start">{{data.class}}<span *ngIf="data.section">'{{data.section.toUpperCase()}}'</span></h6> -->
+      <ion-icon slot="start" name="checkmark-circle" style="color:green"></ion-icon>
+      <ion-label text-wrap>
+        <h2>
+          <ion-col>{{data.school_name}}</ion-col></h2>
+        <h3><ion-col size=30>{{data.block_name}},{{data.district_name}}</ion-col>|
+         {{data.class}}<span *ngIf="data.section"> '{{data.section.toUpperCase()}}'</span></h3>
+        <p><ion-col>{{data.createdon}}</ion-col> |
+          <ion-col style="color:green;font-size:14px;">Synced</ion-col></p>
+      </ion-label>
+    </ion-item>
+   
+    <!-- <ion-list-header>
+      <ion-text color="tertiary"><h6>Local List</h6></ion-text> 
+      </ion-list-header> -->
+  
+      <!-- <ion-item>
+       
+        <h6 slot="start">1</h6>
+        <ion-label>
+            <h2>Government Higher Secondary School</h2>
+            <h3>Tambaram,chennai</h3>
+         
+        </ion-label>
+        <ion-button slot="end" fill="clear" (click)="presentActionSheet()"><ion-icon style= "font-size: 22px;"  name="more" ></ion-icon></ion-button>
+      </ion-item> -->
+     
+              <!-- <ion-item> -->
+                  <!-- <ion-avatar slot="start">
+                    <img src="./avatar-finn.png">
+                  </ion-avatar> -->
+                  <!-- <h6 slot="start">1</h6>
+                  <ion-label>
+                      <h2>Government Higher Secondary School</h2>
+                      <h3>Tambaram,chennai</h3> -->
+                    <!-- <p>Listen, I've had a pretty messed up day...</p> -->
+                  <!-- </ion-label>
+                  <ion-button slot="end" fill="clear" (click)="presentActionSheet()"><ion-icon style= "font-size: 22px;"  name="more" ></ion-icon></ion-button>
+                </ion-item> -->
+    </ion-list>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" >
+      <ion-fab-button size="small" routerLink="/page-route/classroom-data" routerDirection="forward">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <!-- <ion-text style="color:gray"><p style="text-align:center;position: fixed;bottom: 0px;margin-bottom: 0;">Last Sync 16-08-19 12:31 PM</p></ion-text> -->
+</ion-content>
+<ion-footer style="height: 30px;" *ngIf="lastUpdated_value != ''">
+  <ion-text><p style="text-align: center;color:gray;font-size: 12px;">{{lastUpdated_value | date:'medium'}}</p></ion-text>
+</ion-footer>

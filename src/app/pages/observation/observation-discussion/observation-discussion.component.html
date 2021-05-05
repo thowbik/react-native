@@ -1,0 +1,129 @@
+<ion-header>
+  <ion-toolbar class="pale-nave_blue">
+    <ion-grid>
+        <ion-row>
+          <ion-col>
+              <ion-buttons slot="">
+                  <ion-menu-button></ion-menu-button>
+                </ion-buttons>
+          </ion-col>
+          <ion-col class="">
+              <ion-title class="ion-text-center fs-16"><b>OBSERVATION <br>DISCUSSION</b>
+              </ion-title></ion-col>
+          <ion-col>
+              <app-notification></app-notification>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <!-- <ion-progress-bar value="0.5"></ion-progress-bar> -->
+    <!-- <ion-card (click)="expandItem(item)" *ngFor="let item of items">
+      <ion-card-header>
+        <ion-card-title>My Neighbor Totoro</ion-card-title>
+      </ion-card-header>
+  
+      <ion-card-content>
+        <app-expandable expandHeight="100px" [expanded]="item.expanded">
+          <p>
+            Hello there.
+          </p>
+          <p>
+            Hello there.
+          </p>
+          <p>
+            Hello there.
+          </p>
+          <p>
+            Hello there.
+          </p>
+          <p>
+            Hello there.
+          </p>
+          <p>
+            Hello there.
+          </p>
+        </app-expandable>
+      </ion-card-content>
+    </ion-card> -->
+
+ 
+  <!-- SECOND PAGE-->
+
+  <section class="p-0 h-100">  
+    <h4 class="method-header-four text-white text-center m-0">
+     <b> {{sectionData?.sec_name}} </b>
+       <!-- <span *ngIf="isMenuOpen4" class="top-12">&#9650;</span> -->
+    </h4>
+    <div *ngIf="sectionData?.questionList.length"
+        class="content-wrapper bg-dark-violet h-100">
+<!-- 
+        <section *ngFor="let question of sectionData?.questionList;let i = index">
+    <p><b>Q{{i+1}} {{question.ob_qus_name}} </b></p> -->
+
+
+
+
+<!-- 
+    <input type="text" [(ngModel)]="answerNo"/>
+
+    <button type="button" (click)="removeSubQuestions(answerNo)">submit</button>
+    -->
+    <app-questions [treeData]="sectionData?.questionList" (valueChange)='displayCounter($event)'></app-questions>
+
+  
+
+
+   <!-- <ion-list lines="none" class="bg-transparent">
+      <ion-radio-group [(ngModel)]="question.selectedAnswer.answer_id"> 
+      
+          <ion-item *ngFor="let answer of question.ans.ans;let i1 = index" class="bg-transparent">
+            <ion-label>{{answer.ans}}</ion-label>
+            <ion-radio color="favorite" slot="start"  (ionSelect)="answerChecked(answer,question,i1,in)" value={{answer.id}}></ion-radio>
+            <app-questions [treeData]="answer.questionList"></app-questions>
+          
+          </ion-item>
+          </ion-radio-group> 
+     </ion-list> -->
+ 
+    </div>
+</section>
+
+
+   
+
+  </ion-content>
+
+  <!-- <ion-footer style="height:50px;background-color: #2D9CDB;">
+      <ion-tabs>
+        <ion-tab-bar slot="bottom">
+          <ion-tab-button  class="btn-back" (click)="goToBackPage()">
+            <ion-label>BACK</ion-label>
+          </ion-tab-button>
+          <ion-tab-button  class="btn-next" [routerLink]="['/page-route/observation/endObservation']">
+            <ion-label>SUBMIT OBSERVATION</ion-label>
+          </ion-tab-button>
+        </ion-tab-bar>
+      </ion-tabs>
+    </ion-footer> -->
+
+
+    <ion-footer style="height:50px;">
+        <ion-tabs>
+          <ion-tab-bar slot="bottom">
+            <ion-tab-button  class="btn-back" (click)="goToBackPage()">
+              <ion-label>BACK</ion-label>
+            </ion-tab-button>
+            <ion-tab-button class="btn-next"  [routerLink]="['/page-route/observation/updateObservation']">
+              <ion-label>NEXT</ion-label>
+            </ion-tab-button>
+          </ion-tab-bar>
+        </ion-tabs>
+        <!-- <ion-button size="large">Large</ion-button>
+        <ion-button size="large">Large1</ion-button> -->
+      
+        <!-- <ion-text ><p style="text-align: center;color:white;font-size: 25px;line-height: 3px;">Next</p></ion-text> -->
+      </ion-footer>
+
+

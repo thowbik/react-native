@@ -1,0 +1,20 @@
+.new-background-color{
+    --background: #3880ff;
+    --color: #fff;
+}
+.error-message{
+    margin:0;
+    text-align: end;
+    color: red;
+    font-size: 14px;
+    font-style: italic;
+}
+ion-label{
+    font-size: 16px;
+}
+// ion-card{
+//     background-color:#fff;
+//     padding: 7px 16px !important;
+//     -webkit-box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2) !important;
+//     box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2) !important;
+// }

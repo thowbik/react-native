@@ -1,0 +1,22 @@
+<ion-content>
+  <div class="modalcontent-wrapper notifications-wrapper">
+    <ion-text color="" class="ion-text-center pt-2">
+      <p [ngClass]="{ 'ta-font': this.languageType === 'ta' }">
+        {{ this.notificationHeading }}
+      </p>
+    </ion-text>
+
+    <div class="d-flex justify-content-center n-footer">
+      <ion-button
+        class="btn_modal-cancel"
+        (click)="dismiss('Cancel')"
+        [ngClass]="{
+          'ta-font': this.languageType === 'ta',
+          'fs-11': this.languageType === 'ta',
+          'modal-btn-w-50': this.languageType === 'ta'
+        }"
+        >{{ this.cancel }}</ion-button
+      >
+    </div>
+  </div>
+</ion-content>

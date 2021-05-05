@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-buttons slot="">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+        </ion-col>
+        <ion-col class="">
+          <ion-title class="ion-text-center" [ngClass]="{'ta-font': this.languageType === 'ta'}">
+            <b>{{this.Attendance}}<br> {{this.Verification}}</b>
+          </ion-title>
+        </ion-col>
+        <ion-col>
+          <app-notification></app-notification>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+
+</ion-header>
+<ion-content>
+  <ion-text color="" class="ion-text-center pt-2">
+    <h3 class="color-dgrey mt-2"
+      [ngClass]="{'ta-font': this.languageType === 'ta','fs-11': this.languageType === 'ta','fs-18': this.languageType === 'en'}">
+      <b>{{this.verifyAnotherClass}}.</b></h3>
+    <p class="color-dgrey px-1"><span
+        [ngClass]="{'ta-font': this.languageType === 'ta','fs-11': this.languageType === 'ta'}">
+        {{this.completeAttendance_verify}}</span>:</p>
+  </ion-text>
+
+  <ion-list lines="none" class="margin_0_10">
+    <ion-item class="border">
+        <ion-label> {{ this.selectClass }} </ion-label>
+        <ion-select [(ngModel)]="selectedClass" (ngModelChange)="classSelectHandler($event)"
+          *ngIf="classList.length else noClass ">
+          <ion-select-option *ngFor="let classData of classList" [value]="classData">{{classData.class_id}}</ion-select-option>
+        </ion-select>
+        <ng-template #noClass>
+          <ion-select-option value="">No Class Available</ion-select-option>
+        </ng-template>
+    </ion-item>
+
+    <ion-item class="border">
+        <ion-label> {{ this.selectSection }} </ion-label>
+        <ion-select [(ngModel)]="selectedSection" (ngModelChange)="sectionHandler($event)"
+          *ngIf="sectionList.length else nosection ">
+          <ion-select-option *ngFor="let section of sectionList" [value]="section">{{section}}</ion-select-option>
+        </ion-select>
+        <ng-template #nosection>
+          <ion-select-option value="">No Section Available</ion-select-option>
+        </ng-template>
+    </ion-item>
+
+  </ion-list>
+</ion-content>
+
+<ion-footer style="height:50px;background-color: #2D9CDB;">
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button class="btn-next done" (click)="goToOtherClassAttendance()">
+        <ion-label [ngClass]="{'ta-font': this.languageType === 'ta','fs-16': this.languageType === 'ta'}">{{this.next}}
+        </ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-footer>

@@ -1,0 +1,220 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <!-- <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons> -->
+    <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+    <ion-title>
+      Classroom Selection
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+  <ion-content class="ion-contentbg" padding>
+      <ion-card style="padding: 12px !important;" padding position="center">
+          <form [formGroup]="classroomTypeForm">
+           
+              <ion-label position="stacked" class="label"> Classroom type</ion-label><br/>
+              <ion-select class="select" placeholder="Select" interface="popover" formControlName="class_type" (ionChange)="valueChanges($event.target.value)">
+                <ion-select-option value="monograde">Monograde</ion-select-option>
+                <ion-select-option value="multigrade">Multigrade</ion-select-option>
+              </ion-select>
+              <p class="error-message" *ngIf="classroomTypeForm.controls['class_type'].hasError('required') && (classroomTypeForm.controls['class_type'].dirty || classroomTypeForm.controls['class_type'].touched)">Classroom Type is Required</p>
+          
+            <br/><br/>
+            <div *ngIf="classroomTypeForm.controls['classes_taken']">
+              <ion-label class="label" position="floating">What are the Classes</ion-label><br/>
+           
+              <ion-select class="select" multiple="true" placeholder="Select" formControlName="classes_taken" >
+                  <ion-select-option *ngFor="let value of class_list_forClasses" value="{{value.class_name}}">{{value.class_name}}</ion-select-option>
+              </ion-select>
+            
+              <p class="error-message" *ngIf="classroomTypeForm.controls['classes_taken'].hasError('required') && (classroomTypeForm.controls['classes_taken'].dirty || classroomTypeForm.controls['classes_taken'].touched)">Classes is Required</p>
+              <br/>
+            </div>
+           
+
+            <div *ngIf="classroomTypeForm.controls['class_observed'] && classroomTypeForm.controls['classes_taken'].value !=''">
+               
+                <ion-label class="label" position="floating">Class being Observed</ion-label>
+               
+                <ion-select class="select" interface="popover" placeholder="Select" formControlName="class_observed">
+                <ion-select-option *ngFor="let value of classroomTypeForm.value.classes_taken" value="{{value}}">{{value}} </ion-select-option>
+                </ion-select>
+                <p class="error-message" *ngIf="classroomTypeForm.controls['class_observed'].hasError('required') && (classroomTypeForm.controls['class_observed'].dirty || classroomTypeForm.controls['class_observed'].touched)">Class Observed is Required</p>
+                <br/><br/>
+              </div>
+               
+              <div *ngIf="classroomTypeForm.value.class_type == 'monograde'">
+                    <ion-label class="label" position="stacked">Select Class
+                      </ion-label><br/>
+                    <ion-select class="select" placeholder="Select" interface="popover" formControlName="class">
+                        <ion-select-option *ngFor="let value of class_list" value="{{value.class_studying_id}}">{{value.class_name}}</ion-select-option>
+                    </ion-select>
+                    <p class="error-message" *ngIf="classroomTypeForm.controls['class'].hasError('required') && (classroomTypeForm.controls['class'].dirty || classroomTypeForm.controls['class'].touched)">Class is Required</p>
+                    <br/><br/>
+                    </div>
+                
+                      <!-- <ion-label class="label" position="stacked">Select Section 
+                        </ion-label><br/>
+                      <ion-select class="select" interface="popover" placeholder="Select" formControlName="section" (ionChange)="getTotalList()">
+                      </ion-select><br/><br/> -->
+                      
+                          <ion-label>Section</ion-label>
+                           <ion-input style="text-transform: uppercase" class="input" type="text" placeholder="Enter the Section" formControlName="section" ></ion-input>
+                           <p class="error-message" *ngIf="classroomTypeForm.controls['section'].hasError('required') && (classroomTypeForm.controls['section'].dirty || classroomTypeForm.controls['section'].touched)">Section is Required</p>
+                           <br/><br/>
+
+                      <!-- <ion-item> -->
+                        <div >
+                        <ion-label>Number of students on Roll</ion-label>
+                         <ion-input class="input" type="Number" formControlName="tot_students" ></ion-input>
+                         <p class="error-message" *ngIf="classroomTypeForm.controls['tot_students'].hasError('required') && (classroomTypeForm.controls['tot_students'].dirty || classroomTypeForm.controls['tot_students'].touched)">Students on Roll is Required</p>
+                         <br/><br/>
+                      <!-- </ion-item> -->
+                      <!-- <ion-item> -->
+                        <ion-label>Enter Number of Students Present</ion-label>
+                        <ion-input class="input" type="Number" formControlName="students_seen" ></ion-input>
+                        <p class="error-message" *ngIf="classroomTypeForm.controls['students_seen'].hasError('required') && (classroomTypeForm.controls['students_seen'].dirty || classroomTypeForm.controls['students_seen'].touched)">Students present is Required</p>
+                        <br/><br/>
+                        <!-- </ion-item> -->
+                      </div>
+
+                      <!-- <ion-label>Enter Medium of Instruction in Classroom</ion-label>
+                      <ion-input class="input" type="text" formControlName="medium_info" ></ion-input><br/><br/> -->
+                      <ion-label class="label" position="stacked">Medium of Instruction in Classroom
+                        </ion-label>
+                        <br/>
+                      <ion-select class="select" placeholder="Select" interface="popover" formControlName="medium_info" >
+                          <ion-select-option *ngFor="let value of medium_list" value="{{value.medium_info_id}}">{{value.medium_info_name}}</ion-select-option>
+                      </ion-select>
+                      <p class="error-message" *ngIf="classroomTypeForm.controls['medium_info'].hasError('required') && (classroomTypeForm.controls['medium_info'].dirty || classroomTypeForm.controls['medium_info'].touched)">Medium of Instruction is Required</p>
+                      <br/>
+                      <div *ngIf="classroomTypeForm.value.medium_info == '1'">
+                      <ion-label>Specify the Medium of Instruction in Classroom</ion-label>
+                      <ion-input class="input" type="text" formControlName="medium_info_others" ></ion-input><br/>
+                      <p class="error-message" *ngIf="classroomTypeForm.controls['medium_info_others'].hasError('required') && (classroomTypeForm.controls['medium_info_others'].dirty || classroomTypeForm.controls['medium_info_others'].touched)">Specify the Medium info</p>
+                      <br/>
+                    </div>
+                      <ion-label>Name of the Teacher who is Observed</ion-label>
+                      <ion-input class="input" type="text" formControlName="teacher_observed" ></ion-input>
+                      <p class="error-message" *ngIf="classroomTypeForm.controls['teacher_observed'].hasError('required') && (classroomTypeForm.controls['teacher_observed'].dirty || classroomTypeForm.controls['teacher_observed'].touched)">Teacher Name is Required</p>
+                      <br/><br/>
+                      <!-- <ion-label>EMIS ID of the teacher</ion-label>
+                      <ion-input class="input" type="number" formControlName="teacher_emis_id" ></ion-input> 
+                      <p class="error-message" *ngIf="classroomTypeForm.controls['teacher_emis_id'].hasError('required') && (classroomTypeForm.controls['teacher_emis_id'].dirty || classroomTypeForm.controls['teacher_emis_id'].touched)">Teacher EMIS ID is Required</p>
+                      <br/><br/> -->
+                  
+                  
+                      <!-- <ion-label class="label" position="stacked">Select Teacher</ion-label><br/>
+                      <ionic-selectable class="select"
+                      placeholder="&nbsp;&nbsp;&nbsp;Select Teacher"
+                      formControlName="teacher"
+                      itemTextField="teacher_name"
+                      itemValueField="teacher_name"
+                      [items]="teacher_list"
+                      [canSearch]="true"></ionic-selectable><br/><br/> -->
+                      <!-- <ion-label>Name of the Teacher who is Observed</ion-label>
+                      <ion-input class="input" type="Number" formControlName="teacher_observed" ></ion-input><br/><br/> -->
+                   
+                   
+                       
+                    
+           
+                <!-- <ion-item>
+                    <ion-label position="floating" text-wrap>Student Enrolment Class Wise</ion-label>
+                    <ion-input type="text" formControlName="student_enrolment"></ion-input>
+                  </ion-item> -->
+              <!-- <ion-list>
+                
+                  <ion-item>
+                    <ion-label position="stacked">Medium of Instruction 
+                      </ion-label>
+                    <ion-select placeholder="Select  ">
+                      <ion-select-option value="English">English Medium</ion-select-option>
+                      <ion-select-option value="Tamil">Tamil Medium</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                
+                  <ion-item>
+                    <ion-label position="stacked"> Classroom type</ion-label>
+                    <ion-select  okText="Ok" cancelText="Cancel" placeholder="Select">
+                      <ion-select-option value="Monograde">Monograde</ion-select-option>
+                      <ion-select-option value="Multigrade">Multigrade</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                  <ion-item>
+                      <ion-label position="stacked">Classroom Combination 
+                        </ion-label>
+                      <ion-select multiple="true" cancelText="Cancel" okText="Ok" placeholder="Select  ">
+                        <ion-select-option value="1">1</ion-select-option>
+                        <ion-select-option value="2">2</ion-select-option>
+                        <ion-select-option value="3">3</ion-select-option>
+                        <ion-select-option value="4">4</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                  <ion-item>
+                      <ion-label position="stacked">No. Of Teachers
+                        </ion-label>
+                      <ion-select placeholder="Select  ">
+                        <ion-select-option value="1">1</ion-select-option>
+                        <ion-select-option value="2">2</ion-select-option>
+                        <ion-select-option value="3">More than 2</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="stacked">Select standard
+                          </ion-label>
+                        <ion-select placeholder="Select  ">
+                            <ion-select-option value="1">1</ion-select-option>
+                            <ion-select-option value="2">2</ion-select-option>
+                            <ion-select-option value="3">3</ion-select-option>
+                            <ion-select-option value="4">4</ion-select-option>
+                        </ion-select>
+                      </ion-item>
+                      <ion-item>
+                          <ion-label position="stacked">Select Subject
+                            </ion-label>
+                          <ion-select placeholder="Select  ">
+                            <ion-select-option value="f">English</ion-select-option>
+                            <ion-select-option value="m">Maths</ion-select-option>
+                            <ion-select-option value="m">EVS</ion-select-option>
+                            <ion-select-option value="m">Social</ion-select-option>
+                            <ion-select-option value="m">Tamil</ion-select-option>
+                          </ion-select>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label position="stacked">Learning Outcomes</ion-label>
+                            <ion-select  okText="Ok" cancelText="Cancel" placeholder="Select">
+                              <ion-select-option value=""></ion-select-option>
+                              <ion-select-option value=""></ion-select-option>
+                            </ion-select>
+                          </ion-item>
+                          <ion-item>
+                              <ion-label position="stacked">Number of students present for the classroom observed</ion-label>
+                              <ion-input></ion-input>
+                            </ion-item> -->
+                            
+                            <!-- <ion-item>
+                              <ion-label position="fixed">Fixed Label</ion-label>
+                              <ion-input></ion-input>
+                           </ion-item> -->
+                            
+                            <!--  <ion-item>
+                              <ion-label position="stacked">Stacked Label</ion-label>
+                              <ion-input></ion-input>
+                            </ion-item> -->
+                <!-- </ion-list> -->
+                
+          </form>
+      </ion-card>
+    </ion-content>
+    <ion-footer  class="foot hide-on-keyboard-open" translucent="true">
+      <!-- <ion-row> -->
+        <!-- <ion-col col-12 style="padding: 0px;">
+            <ion-button size="large"  expand="block" class="login_button" routerLink="/questions" routerDirection="forward">Continue</ion-button>
+        </ion-col> -->
+        <ion-button expand="full" shape="round" (click)="onSubmit()" class="login_button" >Next<ion-icon name="arrow-forward"></ion-icon></ion-button>
+      <!-- </ion-row> -->
+    </ion-footer>

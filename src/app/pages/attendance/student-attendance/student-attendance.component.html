@@ -1,0 +1,106 @@
+<ion-header>
+  <ion-toolbar class="pale-nave_blue">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-buttons slot="">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+        </ion-col>
+        <ion-col class="top-12">
+          <ion-title
+            class="ion-text-center fs-15"
+            [ngClass]="{ 'ta-font': this.languageType === 'ta' }"
+          >
+            <b>{{ this.studentAttendance }}</b>
+          </ion-title>
+        </ion-col>
+        <ion-col>
+          <app-notification></app-notification>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+<app-progress [progress]="this.progressValue"></app-progress>
+<ion-content class="">
+  <!--ITEM 1 START----------------------------------------------------->
+  <ion-text color="dark" class="text-italic">
+    <p
+      class="fs-12 p-2 color-dgrey"
+      [ngClass]="{ 'ta-font': this.languageType === 'ta' }"
+    >
+      {{ this.rollCall_Info }}
+    </p>
+  </ion-text>
+  <!-- List of Text Items -->
+  <div *ngFor="let attendance of groups | keyvalue">
+    <div class="text-align-center">Grade: {{ attendance.key }}</div>
+    <ion-row
+      [ngClass]="i % 2 == 0 ? 'bg-grey' : ''"
+      *ngFor="let item of attendance.value; let i = index"
+    >
+      <ion-col size="9">
+        <ion-label
+          ><b>{{ item.name }}</b></ion-label
+        >
+      </ion-col>
+      <ion-col class="my-auto">
+        <button
+          class="student-present"
+          (click)="makeAttendance(item, 'p', i, attendance.key)"
+          [ngClass]="{
+            opacity_one: item.status == 'active',
+            opacity_not_one: item.status !== 'active'
+          }"
+        >
+          {{ this.p }}
+        </button>
+      </ion-col>
+      <ion-col class="my-auto">
+        <button
+          class="student-absent opacity_not_one"
+          (click)="makeAttendance(item, 'a', i, attendance.key)"
+          [ngClass]="{
+            opacity_one: item.status == 'Inactive',
+            opacity_not_one: item.status !== 'Inactive'
+          }"
+        >
+          {{ this.a }}
+        </button>
+      </ion-col>
+    </ion-row>
+  </div>
+  <!--ITEM 1 END-------------------------------------------->
+</ion-content>
+
+<!-- [ngClass]="correctedZone!==''? 'opacity_one':'opacity_not_one'" -->
+<ion-footer style="height: 50px;">
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button class="btn-back" (click)="goToClassroom()">
+        <ion-label
+          [ngClass]="{
+            'ta-font': this.languageType === 'ta',
+            'fs-16': this.languageType === 'ta'
+          }"
+          >{{ this.back }}
+        </ion-label>
+      </ion-tab-button>
+      <ion-tab-button class="btn-next" (click)="goToObservationTeaching()">
+        <ion-label
+          class="no-padding"
+          [ngClass]="{
+            'ta-font': this.languageType === 'ta',
+            'fs-16': this.languageType === 'ta'
+          }"
+          >{{ this.next }}
+        </ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+  <!-- <ion-button size="large">Large</ion-button>
+        <ion-button size="large">Large1</ion-button> -->
+
+  <!-- <ion-text ><p style="text-align: center;color:white;font-size: 25px;line-height: 3px;">Next</p></ion-text> -->
+</ion-footer>

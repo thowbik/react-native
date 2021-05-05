@@ -1,0 +1,74 @@
+<ion-content>
+  <div class="modalcontent-wrapper">
+    <ion-text color="" class="ion-text-center pt-2">
+      <p class="mb-0">
+        <b>{{ studentName }} </b>
+      </p>
+      <p
+        [ngClass]="{
+          'ta-font': this.languageType === 'ta',
+          'fs-10': this.languageType === 'ta',
+          'fs-16': this.languageType === 'en'
+        }"
+      >
+        {{ this.reasonInfoTxt }}:
+      </p>
+    </ion-text>
+    <div>
+      <ion-list lines="none">
+        <ion-radio-group>
+          <ion-item
+            *ngFor="let reasonData of misMatchReasonList; let i = index"
+          >
+            <ion-label class="text-show fs-12">{{
+              reasonData.reason
+            }}</ion-label>
+            <ion-radio
+              class="radio-btn"
+              slot="start"
+              value="{{ reasonData.reason_id }}"
+              (ionSelect)="mcqAnswer(reasonData, i)"
+            >
+            </ion-radio>
+          </ion-item>
+          <ion-item *ngIf="showInput">
+            <input
+              required="true"
+              type="text"
+              [(ngModel)]="reasonInput"
+              name="name"
+              class="w-100"
+            />
+          </ion-item>
+          <div class="error errorMessage" *ngIf="showInput && showErrorMessage">
+            Please type the reason for mismatch
+          </div>
+        </ion-radio-group>
+      </ion-list>
+    </div>
+    <div class="d-flex justify-content-center">
+      <ion-button
+        class="btn_modal-cancel"
+        (click)="dismiss('Cancel')"
+        [ngClass]="{
+          'ta-font': this.languageType === 'ta',
+          'fs-10': this.languageType === 'ta',
+          'modal-btn-w-50': this.languageType === 'ta'
+        }"
+      >
+        {{ this.cancel }}</ion-button
+      >
+      <ion-button
+        class="btn_modal-success"
+        (click)="dismiss('value')"
+        [ngClass]="{
+          'ta-font': this.languageType === 'ta',
+          'fs-10': this.languageType === 'ta',
+          'modal-btn-w-50': this.languageType === 'ta'
+        }"
+      >
+        {{ this.submit }}</ion-button
+      >
+    </div>
+  </div>
+</ion-content>

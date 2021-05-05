@@ -1,0 +1,23 @@
+.studentSelectionModal {
+    padding: 30px;
+     color:red;
+    // filter:blur(5px); 
+     //color:lightcyan;
+     // background-color:gray;
+     .modalWrapper {
+        //  border-radius: 7px;
+         // background: rgba(0, 0, 0, 0.5);
+         // color: gray;
+         
+          --height: 98% !important;
+          width:105% !important;
+          margin-top: 9%;
+          //margin-right: 15%;
+         ion-content{
+             background-color:rgb(46, 44, 42);
+         }
+       
+             
+          }
+     
+ }

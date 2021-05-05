@@ -1,0 +1,25 @@
+// http://ionicframework.com/docs/theming/
+@import "~@ionic/angular/css/core.css";
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import "~@ionic/angular/css/display.css";
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+
+//.sc-ion-back-button-ios-h {
+//   color: white;
+// }
+.button-inner.sc-ion-back-button-ios {
+    color: white;
+}
+
+// This is to un-wrap the sentences
+::ng-deep div,
+::ng-deep div.select-text, * {
+    white-space: normal !important;
+}

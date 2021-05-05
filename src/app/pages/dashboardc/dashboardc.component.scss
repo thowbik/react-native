@@ -1,0 +1,32 @@
+.text-bottom {
+  position: absolute;
+  bottom: 0;
+}
+
+.margin-top-10 {
+  margin-top: 10px;
+}
+
+.progressData-outer {
+  width: 100%;
+  text-align: center;
+  background-color: #c4c4c4;
+  color: #fff;
+}
+
+.progressData-inner {
+  overflow: hidden;
+  background-color: #2d9cdb;
+  height: 20px;
+}
+.percentageData-value {
+  position: absolute;
+  top: 0;
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.width-70 {
+  width: 70%;
+  margin: 0 auto;
+}

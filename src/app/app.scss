@@ -1,0 +1,711 @@
+// App Styles
+// ----------------------------------------------------------------------------
+// Put style rules here that you want to apply to the entire application. These
+// styles are for the entire app and not just one component. Additionally, this
+// file can hold Sass mixins, functions, and placeholder classes to be imported
+// and used throughout the application.
+
+// @font-face {
+//   font-family: Avvaiyar;
+//   font-weight: bold;
+//   src: url(../assets/styles/fonts/vanavil.otf) format("opentype");
+// }
+
+:root {
+  --ion-color-favorite: #69bb7b;
+  --ion-color-favorite-rgb: 105, 187, 123;
+  --ion-color-favorite-contrast: #ffffff;
+  --ion-color-favorite-contrast-rgb: 255, 255, 255;
+  --ion-color-favorite-shade: #5ca56c;
+  --ion-color-favorite-tint: #78c288;
+}
+
+.ion-color-favorite {
+  --ion-color-base: var(--ion-color-favorite);
+  --ion-color-base-rgb: var(--ion-color-favorite-rgb);
+  --ion-color-contrast: var(--ion-color-favorite-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-favorite-contrast-rgb);
+  --ion-color-shade: var(--ion-color-favorite-shade);
+  --ion-color-tint: var(--ion-color-favorite-tint);
+}
+
+// ion-modal{
+//   z-index: 20001;
+//   height: 50%;
+//   border: 1px solid;
+//   max-width: 50%;
+//   margin: auto;
+// }
+
+.r-0 {
+  right: 0;
+}
+
+.lh-2 {
+  line-height: 2.6;
+}
+
+.t-8 {
+  top: 8px;
+}
+
+.top-12 {
+  top: 12px !important;
+}
+
+.top-14 {
+  top: 14px !important;
+}
+
+.top-18 {
+  top: 18px !important;
+}
+
+.br-30 {
+  border-radius: 30px;
+}
+
+.opacity_not_one {
+  opacity: 0.3;
+}
+
+.opacity_one {
+  opacity: 1;
+}
+
+.col-icon {
+  text-align: right;
+}
+
+.col-icon ion-icon {
+  font-size: 25px;
+}
+
+.ta-font {
+  font-family: "Vanavil Avvaiyar" !important;
+}
+
+.b-none {
+  background: none;
+}
+
+.box-shadow-none {
+  --box-shadow: none;
+}
+
+.ion-row-list {
+  background: rgba(196, 196, 196, 0.5);
+}
+
+.ion-row-list-none ion-col,
+.ion-row-list ion-col {
+  line-height: 1;
+}
+
+.modal-wrapper.md.sc-ion-modal-md {
+  width: 70%;
+  height: 280px;
+  border-radius: 12px;
+}
+
+.my-custom-modal-dashboarc .modal-wrapper {
+  height: 365px !important;
+}
+
+.my-custom-modal-classroom .modal-wrapper {
+  height: 310px !important;
+}
+
+.my-custom-modal-updateObservation .modal-wrapper {
+  height: 150px !important;
+}
+
+.my-custom-modal-updateObservation.new-info .modal-wrapper {
+  height: 265px !important;
+}
+
+// .modal-wrapper.emi.md.sc-ion-modal-md{
+//   height: 52% !important;
+// }
+
+.my-custom-modal .modal-wrapper {
+  top: 5px;
+  position: absolute;
+  border-radius: 0% !important;
+}
+
+.my-custom-modal-s_assessment .modal-wrapper {
+  height: 345px !important;
+}
+
+.my-custom-modal-assessment .modal-wrapper {
+  height: 215px !important;
+}
+
+.my-custom-modal-attendance .modal-wrapper {
+  height: 425px !important;
+}
+
+// .my-custom-modal-attendance.custom-reason .modal-wrapper{
+//   height: 425px !important;
+// }
+
+.color-lpink {
+  background: rgba(235, 87, 87, 0.3);
+}
+
+.color-lgreen {
+  background: rgba(111, 207, 151, 0.3);
+}
+
+.color-lyellow {
+  --background: rgba(242, 201, 76, 0.2);
+}
+
+.color-lgrey {
+  color: #828282 !important;
+}
+
+.color-dgrey {
+  color: #4f4f4f !important;
+}
+
+.color-black {
+  color: #000000;
+}
+
+.color-blue {
+  color: #2f80ed;
+}
+
+.h-8 {
+  height: 8px;
+}
+
+.h-35 {
+  height: 35px;
+}
+
+.prl-65 {
+  padding: 0px 65px 0px 65px;
+}
+
+.fs-9 {
+  font-size: 9px !important;
+}
+
+.fs-10 {
+  font-size: 10px !important;
+}
+
+.fs-11 {
+  font-size: 11px !important;
+}
+
+.fs-12 {
+  font-size: 12px !important;
+}
+
+.fs-14 {
+  font-size: 14px !important;
+}
+
+.fs-15 {
+  font-size: 15px !important;
+}
+
+.fs-16 {
+  font-size: 16px !important;
+}
+
+.fs-18 {
+  font-size: 18px !important;
+}
+
+.fs-24 {
+  font-size: 24px !important;
+}
+
+.fs-25 {
+  font-size: 25px !important;
+}
+
+.fs-30 {
+  font-size: 30px !important;
+}
+
+.modal-btn-w-50 {
+  width: 50% !important;
+}
+
+.text-secondary {
+  color: #828282;
+}
+
+.text-success {
+  color: #6fcf97;
+}
+
+.text-pending {
+  color: #f2994a;
+}
+
+.text-danger {
+  color: #ff0000;
+}
+
+.text-violet {
+  color: #9b51e0;
+}
+
+.bg-transparent {
+  --background: transparent !important;
+}
+
+.bg-violet {
+  background: rgba(187, 107, 217, 0.2) !important;
+}
+
+.bg-dark-violet {
+  background: rgba(121, 133, 242, 0.2) !important;
+}
+
+.bg-orange {
+  background: rgba(242, 153, 74, 0.2) !important;
+}
+
+.bg-blue {
+  background: rgba(86, 204, 242, 0.2) !important;
+}
+
+.bg-cyan {
+  background: rgba(74, 242, 192, 0.2) !important;
+}
+
+.bg-grey {
+  background: rgba(196, 196, 196, 0.3);
+}
+
+.bg-green {
+  background: #43a047;
+}
+
+.bg-red {
+  background: #f44537;
+}
+
+.br-radius-45 {
+  border-radius: 45%;
+}
+
+.text-show {
+  white-space: nowrap !important;
+}
+
+.vertical-align {
+  height: 100%;
+  vertical-align: middle;
+  font-size: 30px;
+}
+
+.select_box {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #c4c4c4;
+  position: relative;
+  color: #828282;
+}
+
+.select_box:after {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #c4c4c4;
+  position: absolute;
+  top: 40%;
+  right: 5px;
+  content: "";
+  z-index: 98;
+}
+
+.select_box select {
+  width: 100%;
+  border: 0;
+  position: relative;
+  z-index: 99;
+  background: none;
+  -webkit-appearance: none;
+}
+
+ion-button.btn_modal-cancel {
+  --background: #eb5757;
+  --border-radius: 20px;
+  height: 20px;
+  width: 78px;
+}
+
+ion-button.btn_modal-success {
+  --background: #27ae60;
+  --border-radius: 20px;
+  height: 20px;
+  width: 78px;
+}
+
+.btn-start {
+  background: #27ae60;
+  color: #fff;
+}
+
+.btn-back {
+  background: #828282;
+  color: #fff;
+}
+
+.btn-next {
+  background: #27ae60;
+  color: #fff;
+  min-width: 70%;
+}
+
+.btn-next.done {
+  min-width: 100%;
+}
+
+.btn-start ion-label {
+  font-size: 26px;
+}
+
+.btn-back ion-label {
+  font-size: 26px;
+}
+
+.btn-next ion-label {
+  font-size: 26px;
+}
+
+.btn-next.submit ion-label {
+  font-size: 17px;
+}
+
+.border-radius {
+  border: 1px solid #c4c4c4;
+}
+
+.my-nav-1,
+.my-nav-2,
+.my-nav-3 {
+  list-style-type: decimal;
+}
+
+.my-nav-1 li {
+  color: #27ae60;
+  font-weight: bold;
+}
+
+.my-nav-2 li {
+  color: #f2994a;
+  font-weight: bold;
+}
+
+.my-nav-3 {
+  font-weight: bold;
+}
+
+.text-italic {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+.grey-text {
+  font-family: Arial;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  color: #828282;
+}
+
+.pale-nave_blue {
+  --background: #2d9cdb;
+  --color: #fff;
+}
+
+.new-background-color {
+  --background: #2d9cdb;
+  --color: #fff;
+}
+
+.toolbar-background-color {
+  --background: #6fcf97;
+  --color: #fff;
+}
+
+.c_pl-2 {
+  padding-left: 2px;
+}
+
+.pl-5 {
+  padding-left: 5px;
+}
+
+.pl-3 {
+  padding-left: 2rem !important;
+}
+
+.menu_row {
+  height: 150px;
+  background-color: powderblue;
+  text-align: center;
+
+  // width:25px;
+}
+
+.list-space {
+  height: 35px;
+}
+
+.logo {
+  text-align: center;
+}
+
+.menu_col {
+  text-align: center;
+  float: center;
+}
+
+.studentSelectionModal .modalWrapper {
+  width: 600px;
+  height: 300px;
+}
+
+.btn-footer ion-tab-button {
+  width: 40%;
+}
+
+.dropdown-select {
+  min-width: 100%;
+  border: 1px solid #c4c4c4;
+  padding: 2px 2px;
+}
+
+// @import "../theme/studentSelectionModal";
+
+#menu-material {
+  .menu-header {
+    padding: 5px 15px;
+    background-image: url("../assets/img/pencil.jpg");
+    background-size: cover;
+    color: white;
+
+    .name {
+      font-weight: bolder;
+      margin-bottom: 3px;
+
+      // margin-top:5px;
+    }
+
+    .e-mail {
+      margin-top: 0;
+      margin-bottom: 5px;
+    }
+
+    .tn-logo-right {
+      // float:right;
+      // height: 30px;
+      // width: 30px;
+      position: absolute;
+      top: 115px;
+      left: 200px;
+      align-items: flex-end;
+      height: 60px;
+      width: 50px;
+    }
+  }
+
+  .user-avatar {
+    max-width: 125px;
+    height: 125px;
+    padding: 0.5em;
+    height: 12vh;
+  }
+
+  h3,
+  .label {
+    color: #999;
+    font-weight: 400;
+  }
+
+  ion-icon {
+    color: #777;
+  }
+}
+
+.keyboard-open .has-footer {
+  bottom: 0;
+}
+
+.keyboard-open .tabs {
+  display: none;
+}
+
+.keyboard-open .has-tabs {
+  bottom: 0;
+}
+
+.error-message {
+  margin: 0;
+  text-align: end;
+  color: red;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.content-wrapper {
+  padding: 18px;
+  height: 100%;
+}
+
+.radio-toggle {
+  display: flex;
+  justify-content: center;
+}
+
+.radio-btn-label {
+  font-size: 16px !important;
+  white-space: normal !important;
+}
+
+.radio-btn {
+  margin-right: 8px;
+}
+
+.modalcontent-wrapper {
+  padding: 10px;
+}
+
+.list-ques p {
+  font-size: 14px;
+}
+
+.notification-icon {
+  right: 0;
+  position: absolute;
+  top: 11px;
+  font-size: 32px;
+  padding-right: 13px;
+}
+
+.img-schools,
+.img-teacher {
+  position: relative;
+  width: 100%;
+  max-width: 90%;
+
+  // margin: 0 auto;
+}
+
+.img-teacher::after {
+  content: "";
+  background-image: url("../assets/icon/icons-teacher.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  width: 38px;
+  height: 38px;
+  border: 1px solid #c4c4c4;
+  border-radius: 50%;
+  top: -14px;
+  right: -28px;
+  background-color: #fff;
+  z-index: 2222;
+}
+
+.img-schools::after {
+  content: "";
+  background-image: url("../assets/icon/icons-schools.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  width: 38px;
+  height: 38px;
+  border: 1px solid #c4c4c4;
+  border-radius: 50%;
+  top: -14px;
+  right: -28px;
+  background-color: #fff;
+  z-index: 2222;
+}
+
+.img-teacher ion-img,
+.img-schools ion-img {
+  padding: 5px;
+}
+
+.check-mark {
+  width: 30%;
+  margin: auto;
+  border: 7px solid #27ae60;
+  border-radius: 50%;
+}
+
+// @media screen and ( min-height: 640px )
+// {
+//   .my-custom-modal-dashboarc .modal-wrapper{
+//     height: 58% !important;
+//   }
+// }
+
+.pt-3 {
+  padding-top: 4rem !important;
+}
+
+.p {
+  margin-bottom: 0rem !important;
+}
+
+.p-2 {
+  padding-left: 2rem !important;
+}
+
+.error {
+  color: red;
+}
+
+// This is to un-wrap the sentences
+::ng-deep div,
+::ng-deep div.select-text,
+* {
+  white-space: normal !important;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.alert-tappable.sc-ion-alert-md {
+  display: contents;
+}
+
+::ng-deep ion-select .select-text {
+  white-space: normal !important;
+}
+
+.alert-radio-label {
+  white-space: normal !important;
+}
+
+ion-label {
+  white-space: normal !important;
+
+  span {
+    white-space: normal;
+  }
+}
+
+.item.sc-ion-label-md-h,
+.item .sc-ion-label-md-h {
+  white-space: normal !important;
+}

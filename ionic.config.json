@@ -1,0 +1,7 @@
+{
+  "name": "tnschool",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

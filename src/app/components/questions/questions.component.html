@@ -1,0 +1,109 @@
+<section *ngFor="let question of treeData; let in = index" class="">
+  <p>{{ question.question_no }}. {{ question.ob_qus_name }}</p>
+
+  <ion-list
+    *ngIf="question.ans != null && question.type_of_ans == '1'"
+    lines="none"
+    class="bg-transparent"
+  >
+    <ion-radio-group [(ngModel)]="question.selectedAnswer.answer_id">
+      <ng-container *ngFor="let answer of question.ans.ans; let i1 = index">
+        <ion-item class="bg-transparent">
+          <ion-label>{{ answer.ans }}</ion-label>
+          <ion-radio
+            color="favorite"
+            slot="start"
+            (ionSelect)="answerChecked(answer, question, i1, in)"
+            value="{{ answer.id }}"
+          ></ion-radio>
+          <app-questions [treeData]="answer.questionList"></app-questions>
+        </ion-item>
+        <ion-item
+          *ngIf="
+            (answer.ans.toLowerCase() === 'other' || answer.ans === 'மற்றவை') &&
+            (question.selectedAnswer.answer.toLowerCase() === 'other' ||
+              question.selectedAnswer.answer === 'மற்றவை')
+          "
+        >
+          <ion-input
+            #other
+            autofocus="true"
+            [(ngModel)]="answer.otherAns"
+            placeholder="Enter value for other"
+            required="true"
+            (ionBlur)="otherChange(answer, question, i1, in, answer.otherAns)"
+          ></ion-input>
+        </ion-item>
+      </ng-container>
+    </ion-radio-group>
+  </ion-list>
+
+  <ion-list
+    *ngIf="question.ans != null && question.type_of_ans == '2'"
+    lines="none"
+    class="bg-transparent"
+  >
+    <ng-container *ngFor="let answer of question.ans.ans; let i1 = index">
+      <ion-item class="bg-transparent">
+        <ion-checkbox
+          slot="start"
+          color="success"
+          class="m-2"
+          (ionChange)="answerChecked(answer, question, i1, in)"
+          [checked]="answer.checked"
+          [disabled]="false"
+        ></ion-checkbox>
+        <ion-label>{{ answer.ans }}</ion-label>
+      </ion-item>
+      <ion-item
+        *ngIf="
+          (answer.ans.toLowerCase() === 'other' || answer.ans === 'மற்றவை') &&
+          answer.checked
+        "
+      >
+        <ion-input
+          [(ngModel)]="answer.otherAns"
+          placeholder="Enter value for other"
+          required="true"
+          (ionBlur)="otherChange(answer, question, i1, in, answer.otherAns)"
+        ></ion-input>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+
+  <ion-list
+    *ngIf="question.ans == null && question.type_of_ans == '3'"
+    lines="none"
+    class="bg-transparent"
+  >
+    <ion-row>
+      <ion-col size="6">
+        <ion-icon
+          name="camera"
+          class="fs-30"
+          (click)="openCamera('camera', question, '', in)"
+        ></ion-icon>
+      </ion-col>
+      <ion-col>
+        <ion-img
+          *ngIf="imageData != undefined"
+          src="data:image/png;base64, {{ question.selectedAnswer }}"
+        ></ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+
+  <ion-list
+    *ngIf="question.ans != null && question.type_of_ans == '0'"
+    lines="none"
+    class="bg-transparent"
+  >
+    <ion-item>
+      <ion-input
+        placeholder="Enter Input"
+        value="{{ question.selectedAnswer }}"
+        (change)="answerChecked($event.target.value, question, '', in)"
+      ></ion-input>
+    </ion-item>
+  </ion-list>
+</section>

@@ -1,0 +1,51 @@
+<ion-header>
+    <ion-toolbar class="new-background-color">
+      <ion-grid>
+          <ion-row>
+            <ion-col>
+                <ion-buttons slot="">
+                    <ion-menu-button></ion-menu-button>
+                  </ion-buttons>
+            </ion-col>
+            <ion-col class="">
+                <ion-title class="ion-text-center" [ngClass]="{'ta-font': this.languageType === 'ta'}"><b>{{this.Attendance}}<br>{{this.Verification}}</b>
+                </ion-title></ion-col>
+            <ion-col>
+                <app-notification></app-notification>
+              </ion-col>
+          </ion-row>
+        </ion-grid>
+    
+    </ion-toolbar>
+   
+  </ion-header>
+  <ion-content>
+
+      <div class="content-wrapper">
+    <!-- THIRD PAGE-->
+          <section>  
+              <ion-text color="" class="ion-text-center">
+              <h2 class="text-muted fs-18"><b [ngClass]="{'ta-font': this.languageType === 'ta'}">{{this.thankyou}}</b></h2>
+                
+                      <h1 class="fs-18 lh-2"><b><span [ngClass]="{'ta-font': this.languageType === 'ta'}">{{this.class}}</span> {{classDetail?.class_id}} {{classDetail?.section}} <br> {{schoolDetail?.schoolName}}
+                      </b></h1>
+                    </ion-text>
+            </section> 
+  </div>
+    </ion-content>
+    <ion-footer style="height:50px;background-color: #2D9CDB;">
+        <ion-tabs>
+          <ion-tab-bar slot="bottom">    
+            <ion-tab-button  class="btn-next done" (click)="finalSubmit()">
+              <ion-label [ngClass]="{'ta-font': this.languageType === 'ta','fs-16': this.languageType === 'ta'}">{{this.done}}</ion-label>
+            </ion-tab-button>
+          </ion-tab-bar>
+        </ion-tabs>
+        <!-- <ion-button size="large">Large</ion-button>
+        <ion-button size="large">Large1</ion-button> -->
+  
+        <!-- <ion-text ><p style="text-align: center;color:white;font-size: 25px;line-height: 3px;">Next</p></ion-text> -->
+      </ion-footer>
+  
+  
+  

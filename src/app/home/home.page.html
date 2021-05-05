@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="loadData(true, $event)">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-input type="text" [(ngModel)]="txt" placeholder="Enter the text"></ion-input>
+ <ion-button block (click)="login()">Click</ion-button>
+  <ion-list>
+    <ion-item *ngFor="let user of users" tappable (click)="updateUser(user.id)">
+      <ion-thumbnail slot="start">
+        <!-- <img [src]="user.ID"> -->
+        <ion-label>{{user.ID}}</ion-label>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>{{ user.Name }} {{ user.last_name }}</h3><br/>
+        <h2>Age: {{user.Age}}
+        </h2>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

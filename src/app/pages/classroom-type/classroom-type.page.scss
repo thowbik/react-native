@@ -1,0 +1,53 @@
+// app-classroom-data{
+//     ion-content{
+//         background-color:#eee !important;
+//     }
+// }
+// ion-content{
+//     background-color:#eee;
+// }
+ion-card{
+    background-color:#fff;
+    padding: 7px 16px !important;
+    -webkit-box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2) !important;
+    box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2) !important;
+}
+.new-background-color{
+    --background: #3880ff;
+    --color: #fff;
+}
+.ion-contentbg{
+    --background: #eeeeee91;
+}
+.foot{
+    background-color:#eeeeee91;
+}
+// .label{
+//     // font-size: 14px;
+//     // font-weight: bolder;
+// }
+.select{
+    border-left: 6px solid blue;
+    border-right:1px solid black;
+    border-top:1px solid black;
+    border-bottom:1px solid black;
+    border-radius: 10px;
+    color: black;
+    // border-block-start-color: aqua;
+   
+}
+.input{
+    border-left: 6px solid blue;
+    border-right:1px solid black;
+    border-top:1px solid black;
+    border-bottom:1px solid black;
+    border-radius: 10px;
+    // border-block-start-color: aqua;
+    // font-weight: bold;
+    font-size: 16px;
+    color:black;
+   
+}
+ion-label{
+    font-size: 16px;
+  }

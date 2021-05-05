@@ -1,0 +1,23 @@
+
+
+    .progress-outer {
+
+        width: 100%;
+    text-align: center;
+    background-color: #C4C4C4;
+    color: #fff;   
+    }
+
+    .progress-inner {
+        overflow: hidden;
+        background-color:#27AE60;
+        height: 20px;
+
+    }
+    .percentage-value{
+        position:absolute;
+        top:0;
+        margin-bottom:0;
+        width:100%;
+    }
+

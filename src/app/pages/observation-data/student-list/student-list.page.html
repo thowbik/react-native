@@ -1,0 +1,355 @@
+<ion-header>
+  <ion-toolbar  class="new-background-color">
+    <ion-buttons slot="start">
+      <ion-back-button ></ion-back-button>
+    </ion-buttons>
+    <ion-title>Student Assessment</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  >
+  <!-- <ion-list >
+    <ion-item >
+<h5 slot="start">1</h5>
+      <ion-label text-wrap>  
+        <span (click)="ExpandItem()">
+          <ion-ripple-effect>  </ion-ripple-effect>
+        <h4>Name</h4>
+        <h6><span color="secondary">Roll</span> </h6>
+        </span>
+        <ion-label id="expandWrapper" class="expand-wrapper" [class.collapsed]="!Expanded">
+          <br/>  <ion-item style="width:85%">
+                <ion-label position="floating">Subject
+                  </ion-label>
+                <ion-select [(ngModel)]="medium">
+                  <ion-select-option value="">Select</ion-select-option>
+                    <ion-select-option value="t">Tamil</ion-select-option>
+                    <ion-select-option value="e">English</ion-select-option>
+                    <ion-select-option value="m">Maths</ion-select-option>
+                  </ion-select> 
+              </ion-item>
+        </ion-label> 
+      </ion-label>
+        <ion-icon name="arrow-dropright-circle" color="secondary" (click)="submit(rec,i)"></ion-icon>
+  </ion-item>
+</ion-list> -->
+
+
+<form [formGroup]="studentGrade">
+<ion-card text-wrap>
+    <span *ngFor="let item of student_count_chip;let i=index" >
+        <ion-chip (click)="SelectedOption($event.target.innerText,i)" [color]="tertiary" >
+           <!-- <ion-icon  name="search" color="tertiary"></ion-icon> -->
+         <ion-label name="lab" color="tertiary">S-{{i+1}}</ion-label>
+       </ion-chip>
+     </span><br/>
+
+<ion-list  *ngIf="studentGrade.controls['medium']">
+    <ion-radio-group  formControlName="medium" (ionChange)="changeOptions('medium',$event.target.value);dynamicControlGeneration()">
+      <ion-list-header>
+        <ion-label >Select the Subject</ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let ans of class_medium" lines="none">
+        <ion-label>{{ans}}</ion-label>
+        <ion-radio slot="start" value="{{ans}}"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+    <p class="error-message" *ngIf="studentGrade.controls['medium'].hasError('required') && (studentGrade.controls['medium'].dirty || studentGrade.controls['medium'].touched)">Subject is Required</p>
+    </ion-list>
+
+
+    <div *ngIf="studentGrade.controls['unit']">
+      <ion-label class="label" position="stacked">Unit
+      </ion-label><br/>
+    <ion-select class="select" placeholder="Select" interface="popover"  formControlName="unit" (ionChange)="changeOptions('unit',$event.target.value);dynamicControlGeneration()">
+      <ion-select-option *ngFor="let value of unitListValue"  [value]="value">{{value}}</ion-select-option>
+    </ion-select>
+    <p class="error-message" *ngIf="studentGrade.controls['unit'].hasError('required') && (studentGrade.controls['unit'].dirty || studentGrade.controls['unit'].touched)">Unit is Required</p>
+    <br/>
+  </div>  
+
+    <div *ngIf="studentGrade.controls['outcome']">
+      {{outcomeListValue | json}}
+    <ion-label class="label" position="stacked">Learning Outcome
+      </ion-label><br/>
+    <ion-select  class="select" placeholder="Select" interface="popover"  formControlName="outcome" (ionChange)="changeOptions('outcome',$event.target.value);dynamicControlGeneration()">
+        <span>  <ion-select-option  text-wrap *ngFor="let value of outcomeListValue"  [value]="value">{{value}}</ion-select-option></span>
+    </ion-select>
+    <p class="error-message" *ngIf="studentGrade.controls['outcome'].hasError('required') && (studentGrade.controls['outcome'].dirty || studentGrade.controls['outcome'].touched)">Learning Outcome is Required</p>
+    <br/>
+  </div>
+
+ 
+
+  <ion-label>Student Name</ion-label>
+    <ion-input class="input" type="text"  formControlName="student"></ion-input>
+    <p class="error-message" *ngIf="studentGrade.controls['student'].hasError('required') && (studentGrade.controls['student'].dirty || studentGrade.controls['student'].touched)">Student name is Required</p><br/>
+    <!-- <ion-label>Student EMIS ID</ion-label>
+    <ion-input class="input" type="number"  formControlName="student_emis_id"></ion-input>
+    <p class="error-message" *ngIf="studentGrade.controls['student_emis_id'].hasError('required') && (studentGrade.controls['student_emis_id'].dirty || studentGrade.controls['student_emis_id'].touched)">EMIS ID is Required</p><br/> -->
+
+    <!-- <ion-item >
+        <ion-label text-wrap>Select the Student</ion-label>
+        <ionic-selectable
+        formControlName="student"
+     itemValueField="name"
+     itemTextField="name"
+    [items]="students_list"
+    [canSearch]="true"
+    [disabledItems]="disabledValue">
+  </ionic-selectable>
+  </ion-item> -->
+  <!-- <p class="error_field" *ngIf="studentGrade.controls['student'].errors && studentGrade.controls['student'].dirty">Student Selection is Required</p> -->
+ 
+  <!-- <ion-list  >
+      <ion-radio-group  formControlName="medium">
+        <ion-list-header>
+          <ion-label >Select the Subject</ion-label>
+        </ion-list-header>
+       
+        <ion-item *ngFor="let ans of class_medium" lines="none">
+          <ion-label>{{ans.name}}</ion-label>
+          <ion-radio slot="start" value="{{ans.name}}"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+      </ion-list> -->
+
+      <!-- <ion-label class="label" position="stacked">Grade
+      </ion-label><br/>
+    <ion-select class="select" placeholder="Select" interface="popover"  formControlName="grade" (ionChange)="changeOptions('grade',$event.target.value)">
+        <ion-select-option *ngFor="let value of gradeListValue"  [value]="value.name">{{value.name}}</ion-select-option>
+    </ion-select><br/> -->
+
+    <!-- <ion-label class="label" position="stacked">Learning Outcome
+    </ion-label><br/>
+  <ion-select class="select" placeholder="Select" interface="popover"  formControlName="outcome" (ionChange)="changeOptions('outcome',$event.target.value)">
+    <ion-select-option *ngFor="let value of outcomeListValue"  [value]="value.id">{{value.name}}</ion-select-option>
+  </ion-select><br/>
+  
+  <ion-label class="label" position="stacked">Unit
+  </ion-label><br/>
+<ion-select class="select" placeholder="Select" interface="popover"  formControlName="unit" (ionChange)="changeOptions('unit',$event.target.value)">
+  <ion-select-option *ngFor="let value of unitListValue"  [value]="value.name">{{value.name}}</ion-select-option>
+</ion-select><br/> -->
+
+<!-- <ion-label class="label" position="stacked">Is the Leaning Outcome updated
+  </ion-label><br/>
+<ion-select class="select" placeholder="Select" interface="popover"  formControlName="learning_outcome_updated" >
+    <ion-select-option  value="yes">Yes</ion-select-option>
+    <ion-select-option  value="no">No</ion-select-option>
+</ion-select><br/> -->
+
+
+<!-- <ion-label>Student Name</ion-label>
+<ion-input class="input" type="text"  formControlName="student"></ion-input><br/>
+<ion-label>Student EMIS ID</ion-label>
+<ion-input class="input" type="number"  formControlName="student_emis_id"></ion-input><br/> -->
+
+<div formArrayName="questions" *ngIf="studentGrade.controls['questions'] && studentGrade.value.learning_outcome_updated =='no'">
+  <div *ngFor="let ques of studentGrade.controls.questions['controls'];let index=index" >
+    <div [formGroupName]="index">
+
+      <!-- <ion-label>Student Name</ion-label>
+      <ion-input class="input" type="text"  formControlName="student"></ion-input><br/>
+      <ion-label>Student EMIS ID</ion-label>
+      <ion-input class="input" type="number"  formControlName="student_emis_id"></ion-input><br/> -->
+      <!-- <ion-label>Student Name</ion-label>
+      <ion-input class="input" type="text"  formControlName="student"></ion-input><br/>
+      <ion-label>Student EMIS ID</ion-label>
+      <ion-input class="input" type="number"  formControlName="student_emis_id"></ion-input><br/> -->
+
+      <ion-label>Record the topic previously taught by the teacher for the subject selected</ion-label>
+      <ion-input class="input" formControlName="topic_record" type="text" ></ion-input><br/>
+  
+      <ion-card-subtitle><h6>Question 1</h6></ion-card-subtitle>
+      <ion-label>Enter the Question asked</ion-label>
+      <ion-input class="input" type="text" formControlName="question_asked1"></ion-input><br/>
+            <ion-label class="label" position="stacked">Did the Student answered correctly
+              </ion-label><br/>
+            <ion-select class="select" placeholder="Select" interface="popover"  formControlName="answered_correctly1">
+                <ion-select-option  value="yes">Yes</ion-select-option>
+                <ion-select-option  value="no">No</ion-select-option>
+            </ion-select><br/>
+          <!-- </ion-item> -->
+          <!-- <ion-label>Remarks</ion-label>
+          <ion-input class="input" type="text" formControlName="remarks1"></ion-input><br/> -->
+       
+     <hr/>
+     <ion-card-subtitle><h6>Question 2</h6></ion-card-subtitle>
+     <ion-label>Enter the Question asked</ion-label>
+     <ion-input class="input" type="text" formControlName="question_asked2"></ion-input><br/>
+           <ion-label class="label" position="stacked">Did the Student answered correctly
+             </ion-label><br/>
+           <ion-select class="select" placeholder="Select" interface="popover" formControlName="answered_correctly2">
+               <ion-select-option  value="yes">Yes</ion-select-option>
+               <ion-select-option  value="no">No</ion-select-option>
+           </ion-select><br/>
+         <!-- </ion-item> -->
+         <!-- <ion-label>Remarks</ion-label>
+         <ion-input class="input" type="text" formControlName="remarks2"></ion-input><br/> -->
+       
+           <hr/>
+           <ion-card-subtitle><h6>Question 3</h6></ion-card-subtitle>
+           <ion-label>Enter the Question asked</ion-label>
+           <ion-input class="input" type="text" formControlName="question_asked3"></ion-input><br/>
+                 <ion-label class="label" position="stacked">Did the Student answered correctly
+                   </ion-label><br/>
+                 <ion-select class="select" placeholder="Select" interface="popover" formControlName="answered_correctly3">
+                     <ion-select-option  value="yes">Yes</ion-select-option>
+                     <ion-select-option  value="no">No</ion-select-option>
+                 </ion-select><br/>
+               <!-- </ion-item> -->
+               <!-- <ion-label>Remarks</ion-label>
+               <ion-input class="input" type="text" formControlName="remarks3" ></ion-input><br/> -->
+              </div>
+              </div>
+              </div>
+
+              <div formArrayName="questions" *ngIf="studentGrade.controls['questions'] && studentGrade.value.learning_outcome_updated =='yes'">
+                  <div *ngFor="let radio of studentGrade.controls.questions['controls'];let i=index" [formGroupName]="i">
+
+                      <!-- <ion-list  >
+                          <ion-radio-group  formControlName="medium">
+                            <ion-list-header>
+                              <ion-label >Select the Subject</ion-label>
+                            </ion-list-header>
+                            <ion-item *ngFor="let ans of class_medium" lines="none">
+                              <ion-label>{{ans.name}}</ion-label>
+                              <ion-radio slot="start" value="{{ans.name}}"></ion-radio>
+                            </ion-item>
+                          </ion-radio-group>
+                          </ion-list>
+
+                          <ion-label class="label" position="stacked">Learning Outcome
+                            </ion-label><br/>
+                          <ion-select class="select" placeholder="Select" interface="popover"  formControlName="outcome" (ionChange)="changeOptions('outcome',$event.target.value)">
+                            <ion-select-option *ngFor="let value of outcomeListValue"  [value]="value.id">{{value.name}}</ion-select-option>
+                          </ion-select><br/>
+                          
+                          <ion-label class="label" position="stacked">Unit
+                          </ion-label><br/>
+                        <ion-select class="select" placeholder="Select" interface="popover"  formControlName="unit" (ionChange)="changeOptions('unit',$event.target.value)">
+                          <ion-select-option *ngFor="let value of unitListValue"  [value]="value.name">{{value.name}}</ion-select-option>
+                        </ion-select><br/>
+
+                        <ion-label>Student Name</ion-label>
+                          <ion-input class="input" type="text"  formControlName="student"></ion-input><br/>
+                          <ion-label>Student EMIS ID</ion-label>
+                          <ion-input class="input" type="number"  formControlName="student_emis_id"></ion-input><br/> -->
+                     
+                    <ion-item *ngIf="radio.get('type').value== '1'">
+                          <ion-label text-wrap  position="floating">{{radio.get('ques').value}}</ion-label><br/>
+                             <ion-input type="text" formControlName="ans" floating></ion-input>
+                        </ion-item>
+                 
+                   <ion-list  *ngIf="radio.get('type').value== '2'" >
+                   
+                     <ion-radio-group formControlName="ans"  (ionSelect)="valueChanges($event.target.value,radio.value,i)">
+                       <div class="list-header">
+                         <div *ngIf="radio.get('showcount').value != ''">
+                            <ion-label  *ngIf="radio.get('title').value != ''"><h2 style="margin-bottom: 10px;"><b>{{radio.get('title').value}}</b></h2></ion-label>
+                           <div *ngFor="let question of radio.get('ques').value;let qIndex=index" style="margin-bottom:5px;">
+                         <ion-label >Qn {{qIndex +1}} - {{question.qn}}</ion-label>
+                        </div>
+                        </div>
+                        <div *ngIf="radio.get('showcount').value == ''">
+                            <ion-label >{{radio.get('ques').value}}</ion-label>
+                        </div>
+                      </div>
+                       <ion-item *ngFor="let ans of radio.get('answer_key').value">
+                       <span>{{ans.ans}}</span>
+                         <ion-radio slot="start" value="{{ans.ans}}"></ion-radio>
+                       </ion-item>
+                     </ion-radio-group>
+                     </ion-list>
+                     
+                     <ion-item *ngIf="radio.get('type').value== '3'">
+                         <ion-label text-wrap>{{radio.get('ques').value}}</ion-label>
+                         <!-- <div *ngFor="let ans of radio.get('answer_key').value"> -->
+                         <ionic-selectable
+                      formControlName="ans"
+                      itemValueField="ans"
+                      itemTextField="ans"
+                     [items]="radio.get('answer_only').value"
+                     [canSearch]="true"
+                     (onChange)="valueChanges($event.value.ans,radio.value,i)">
+                   
+                   </ionic-selectable>
+               
+                       </ion-item>
+                 
+                       <ion-item *ngIf="radio.get('type').value== '4'">
+                           <ion-label text-wrap >{{radio.get('ques').value}}</ion-label><br/>
+                           <ionic-selectable 
+                           formControlName="ans"
+                           [items]="radio.get('answer_only').value"
+                           itemValueField="ans"
+                           itemTextField="ans"
+                           [isMultiple]="true"
+                           [canSearch]="true"
+                          (onChange)="valueChanges($event.value.ans,radio.value,i)">
+                         </ionic-selectable>
+                        
+                         </ion-item>
+                        
+                         <div *ngIf="radio.get('type').value == '5'">
+                             <ion-list  formArrayName="ans">
+                               <ion-item-group>
+                             
+                                     <ion-label padding text-wrap>{{radio.get('ques').value}}</ion-label>
+                                   <ion-item *ngFor="let ans of radio.get('answer_key').value">
+                                     <ion-label style="white-space: normal;">{{ ans.ans }}</ion-label>
+                                     <ion-checkbox slot="start" (ionChange)="onChange(ans.ans, $event.detail.checked, i)" value="{{ans.ans}}"></ion-checkbox>
+                                   </ion-item>
+                                 </ion-item-group>
+                              
+                               </ion-list>
+                             </div>
+                             <p class="error-message" *ngIf="radio.controls['ans'].hasError('required') && (radio.controls['ans'].dirty || radio.controls['ans'].touched)">Field is Required</p>
+                   
+                    </div>
+                    </div>
+               
+
+    </ion-card>
+     <!-- <ion-card>
+    
+
+       <ion-label>What are some recommended action items for the classroom</ion-label>
+       <ion-input class="input" type="text" placeholder="(Enter Two)" formControlName="recomend_class_action"></ion-input><br/>
+     
+
+          <ion-label class="label" position="stacked">Is there evidence of teacher having followed the recommended action items from last visit
+            </ion-label><br/>
+          <ion-select class="select" placeholder="Select" interface="popover" formControlName="teacher_last_visit">
+              <ion-select-option  value="yes">Yes</ion-select-option>
+              <ion-select-option  value="no">No</ion-select-option>
+              <ion-select-option  value="na">Not Applicable</ion-select-option>
+          </ion-select><br/> -->
+       <!-- </ion-item> -->
+      <!-- <ion-card-header>
+        <ion-card-title>Rating of the Student</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+          <rating [rate]="rate"
+          formControlName="rating"
+          readonly="false"
+          size="default"
+          (rateChange)="onRateChange($event)">
+        </rating>
+        <ion-label class="rating_label" [style.color]="ratingDescription.color">{{ratingDescription.value}}</ion-label>
+      </ion-card-content> -->
+    <!-- </ion-card>  -->
+  </form>
+</ion-content>
+<ion-footer>
+    <!-- <ion-button float-right size="default" (click)="onSubmit()" class="login_button" router>Next<ion-icon name="arrow-forward"></ion-icon></ion-button> -->
+    <ion-row>
+      <ion-col>
+        <ion-button color="secondary" expand="block" (click)="onSubmit()">Save </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button color="primary" expand="block" (click)="continue()">Next Student</ion-button>
+      </ion-col>
+    </ion-row>
+</ion-footer>

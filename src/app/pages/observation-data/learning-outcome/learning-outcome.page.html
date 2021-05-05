@@ -1,0 +1,185 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Topic and learning outcome details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <form [formGroup]="questionForm">
+        <!-- <ion-card style="padding: 12px !important;"> -->
+        <div formArrayName="pedagogy_info">
+         
+          <div *ngFor="let radio of questionForm.controls.pedagogy_info['controls'];let i=index" >
+          
+                  <div [formGroupName]="i">
+            
+           <ion-item *ngIf="radio.get('type').value== '1'">
+             <ion-label text-wrap  position="floating">{{radio.get('ques').value}}</ion-label><br/>
+                <ion-input type="text" formControlName="ans" floating></ion-input>
+           </ion-item>
+           <p class="error-message" *ngIf="radio.controls['ans'].errors && radio.controls['ans'].dirty">Field is Required</p>
+    
+      <ion-list  *ngIf="radio.get('type').value== '2'">
+      
+        <ion-radio-group formControlName="ans"  (ionSelect)="valueChanges($event.target.value,radio.value,i)">
+          <ion-list-header>
+            <ion-label >{{radio.get('ques').value}}</ion-label>
+          </ion-list-header>
+          <!-- {{radio.get('answer_key').value | json}} -->
+          <ion-item *ngFor="let ans of radio.get('answer_key').value">
+            <ion-label>{{ans.ans}}</ion-label>
+            <ion-radio slot="start" value="{{ans.ans}}"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+        </ion-list>
+        
+        <ion-item *ngIf="radio.get('type').value== '3'">
+            <ion-label text-wrap>{{radio.get('ques').value}}</ion-label>
+            <!-- <div *ngFor="let ans of radio.get('answer_key').value"> -->
+            <ionic-selectable
+         formControlName="ans"
+         itemValueField="ans"
+         itemTextField="ans"
+        [items]="radio.get('answer_only').value"
+        [canSearch]="true"
+        (onChange)="valueChanges($event.value.ans,radio.value,i)">
+      
+      </ionic-selectable>
+    <!-- </div> -->
+            <!-- <ion-select formControlName="ans" interface="alert" (ionChange)="valueChanges($event.target.value,radio.value,i)">
+              <ion-select-option *ngFor="let ans of radio.get('answer_key').value" value="{{ans.ans}}">{{ans.ans}}</ion-select-option>
+            </ion-select> -->
+          </ion-item>
+    
+          <ion-item *ngIf="radio.get('type').value== '4'">
+              <ion-label text-wrap >{{radio.get('ques').value}}</ion-label><br/>
+              <ionic-selectable 
+              formControlName="ans"
+              [items]="radio.get('answer_only').value"
+              itemValueField="ans"
+              itemTextField="ans"
+              [isMultiple]="true"
+              [canSearch]="true"
+             (onChange)="valueChanges($event.value.ans,radio.value,i)">
+            </ionic-selectable>
+           
+              <!-- <ion-select multiple formControlName="ans" (ionChange)="valueChanges($event.target.value,radio.value,i)">
+                <ion-select-option *ngFor="let ans of radio.get('answer_key').value" value="{{ans.ans}}">{{ans.ans}}</ion-select-option>
+              </ion-select> -->
+            </ion-item>
+            <!-- {{radio.get('answer_only').value}} -->
+            <div *ngIf="radio.get('type').value == '5'">
+                <ion-list  formArrayName="ans">
+                  <ion-item-group>
+                    <!-- <div *ngFor="let choice of radio.controls.check['controls']; let j = index"> -->
+                        <ion-label padding text-wrap>{{radio.get('ques').value}}</ion-label>
+                      <ion-item *ngFor="let ans of radio.get('answer_key').value">
+                        <ion-label style="white-space: normal;">{{ ans.ans }}</ion-label>
+                        <ion-checkbox slot="start" (ionChange)="onChange(ans.ans, $event.detail.checked, i)" value="{{ans.ans}}"></ion-checkbox>
+                      </ion-item>
+                    </ion-item-group>
+                    <!-- </div> -->
+                  </ion-list>
+                </div>
+                <!-- {{questionForm.dirty}} -->
+                <p class="error-message" *ngIf="radio.controls['ans'].hasError('required') && (radio.controls['ans'].dirty || radio.controls['ans'].touched)">Field is Required</p>
+
+                <div *ngIf="extra_field[i]">
+                
+                    <ion-item *ngIf="extra_field[i].next_filed == 'freetext' && extra_field[i].open">
+                    <ion-label position="floating">{{extra_field[i].placeholder}}</ion-label>
+                    <ion-input type="text" formControlName="subfield_value"></ion-input>
+                  </ion-item>
+              </div>
+              <div *ngIf="extra_field[i]">
+                <ion-item lines="none" *ngIf="extra_field[i].next_filed == 'img' && extra_field[i].open" >
+                    <ion-button  slot="end"> <ion-label>Capture Image</ion-label><ion-icon name="md-camera"></ion-icon></ion-button>
+                  </ion-item>
+                  <!-- <p class="error-message" *ngIf="radio.controls['subfield_value'].hasError('required') && (radio.controls['subfield_value'].dirty || radio.controls['subfield_value'].touched)">Field is Required</p> -->
+                  </div> 
+
+      <div formArrayName="sub_field_array" *ngIf="radio.get('sub_field_array')">
+        <div *ngFor="let sub_field of radio.get('sub_field_array').controls;let u=index" [formGroupName]="u">
+
+          <!-- {{sub_field.value | json}} -->
+          <ion-item *ngIf="sub_field.get('type').value== '1'">
+              <ion-label text-wrap  position="floating">{{sub_field.get('ques').value}}</ion-label><br/>
+                 <ion-input type="text" formControlName="ans" floating></ion-input>
+            </ion-item>
+          <ion-list  *ngIf="sub_field.get('type').value== '2'">
+      
+              <ion-radio-group formControlName="ans" >
+                <ion-list-header>
+                  <ion-label >{{sub_field.get('ques').value}}</ion-label>
+                </ion-list-header>
+                <!-- {{radio.get('answer_key').value | json}} -->
+                <ion-item *ngFor="let ans of sub_field.get('answer_key').value">
+                  <ion-label>{{ans.ans}}</ion-label>
+                  <ion-radio slot="start" value="{{ans.ans}}"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+              </ion-list>
+
+          <ion-item *ngIf="sub_field.get('type').value== '3'">
+              <ion-label text-wrap>{{sub_field.get('ques').value}}</ion-label>
+              <!-- <div *ngFor="let ans of sub_field.get('answer_key').value"> -->
+              <ionic-selectable
+           formControlName="ans"
+           itemValueField="ans"
+           itemTextField="ans"
+          [items]="sub_field.get('answer_only').value"
+          [canSearch]="true"
+         >
+        
+        </ionic-selectable>
+      <!-- </div> -->
+              <!-- <ion-select formControlName="ans" interface="alert" (ionChange)="valueChanges($event.target.value,sub_field.value,i)">
+                <ion-select-option *ngFor="let ans of sub_field.get('answer_key').value" value="{{ans.ans}}">{{ans.ans}}</ion-select-option>
+              </ion-select> -->
+            </ion-item>
+
+          <ion-item *ngIf="sub_field.get('type').value== '5' || sub_field.get('type').value == '4'">
+              <ion-label text-wrap >{{sub_field.get('ques').value}}</ion-label><br/>
+              <ionic-selectable 
+              formControlName="ans"
+              [items]="sub_field.get('answer_only').value"
+              itemValueField="ans"
+              itemTextField="ans"
+              [isMultiple]="true"
+              [canSearch]="true"
+             >
+            </ionic-selectable>
+           
+              <!-- <ion-select multiple formControlName="ans" (ionChange)="valueChanges($event.target.value,sub_field.value,i)">
+                <ion-select-option *ngFor="let ans of sub_field.get('answer_key').value" value="{{ans.ans}}">{{ans.ans}}</ion-select-option>
+              </ion-select> -->
+            </ion-item>
+
+          <!-- <div *ngIf="sub_field.get('type').value == '4'">
+              <ion-list  formArrayName="ans">
+                <ion-item-group>
+                  <div *ngFor="let choice of sub_field.controls.check['controls']; let j = index">
+                      <ion-label padding text-wrap>{{sub_field.get('ques').value}}</ion-label>
+                    <ion-item *ngFor="let ans of sub_field.get('answer_key').value">
+                      <ion-label style="white-space: normal;">{{ ans.ans }}</ion-label>
+                      <ion-checkbox slot="start" (ionChange)="onChangeSubField(ans.ans, $event.detail.checked, u,i)" value="{{ans.ans}}"></ion-checkbox>
+                    </ion-item>
+                  </ion-item-group>
+                  </div>
+                </ion-list>
+              </div> -->
+
+      </div>
+    </div>
+  </div>
+        </div>
+      </div>
+ 
+    </form>
+</ion-content>
+<ion-footer>
+    <ion-button expand="full" color="primary" shape="round" (click)="onSubmit()">Save <ion-icon name="arrow-forward"></ion-icon></ion-button>
+</ion-footer>

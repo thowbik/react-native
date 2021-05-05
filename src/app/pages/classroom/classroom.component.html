@@ -1,0 +1,235 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-buttons slot="">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+        </ion-col>
+        <ion-col class="">
+          <ion-title
+            class="ion-text-center"
+            [ngClass]="{ 'ta-font': this.languageType === 'ta' }"
+          >
+            <b>{{ this.classroom }}<br />{{ this.Details }} </b>
+          </ion-title>
+        </ion-col>
+        <ion-col>
+          <app-notification></app-notification>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <app-progress [progress]="this.progressValue"></app-progress>
+  <div class="content-wrapper">
+    <ion-text color="dark" class="text-italic">
+      <p *ngIf="this.languageType === 'en'" class="fs-12 p-2 mb-0">
+        <span>{{ this.Note }}</span
+        >: {{ this.doIt }} {{ this.teacherDetails?.teacher_name }}'s
+        {{ this.takeAttendance }}
+      </p>
+
+      <p *ngIf="this.languageType === 'ta'" class="fs-12 p-2 mb-0">
+        <span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+          this.Note
+        }}</span
+        >:{{ this.takeAttendance }} {{ this.teacherDetails?.teacher_name }}
+        {{ this.doIt }}
+      </p>
+    </ion-text>
+    <ion-list lines="none">
+      <ion-item class="border">
+        <ion-label [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+          gradeLabel
+        }}</ion-label>
+        <ion-select
+          [(ngModel)]="classType"
+          (ngModelChange)="mySelectHandler($event)"
+        >
+          <ion-select-option [value]="2">{{ multigrade }}</ion-select-option>
+          <ion-select-option [value]="1">{{ monograde }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item *ngIf="toggleMultigrade">
+        <div class="">
+          <ion-text color="" class="pt-2">
+            <p
+              class="fs-14"
+              [ngClass]="{ 'ta-font': this.languageType === 'ta' }"
+            >
+              {{ this.teacherResponsible }}:
+            </p>
+          </ion-text>
+
+          <ion-list lines="none">
+            <ng-container *ngFor="let class of classInfoList; let i = index">
+              <ion-item *ngIf="!(class.class_id > 8)">
+                <ion-checkbox
+                  slot="start"
+                  color="success"
+                  class="m-2"
+                  (ngModelChange)="selectStandard('checkbox', class, i)"
+                  [(ngModel)]="class.checked"
+                ></ion-checkbox>
+                <ion-label>{{ class.class_id }}</ion-label>
+              </ion-item>
+            </ng-container>
+          </ion-list>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <div *ngIf="showMonograde" class="">
+          <ion-text color="" class="pt-2">
+            <p
+              class="fs-14"
+              [ngClass]="{ 'ta-font': this.languageType === 'ta' }"
+            >
+              {{ this.teacherClass }}:
+            </p>
+          </ion-text>
+          <ion-list lines="none">
+            <ion-radio-group [(ngModel)]="checkedValue">
+              <ng-container *ngFor="let class of classInfoList; let i = index">
+                <ion-item *ngIf="!(class.class_id > 8)">
+                  <ion-label class="text-nowrap fs-12">{{
+                    class.class_id
+                  }}</ion-label>
+                  <ion-radio
+                    color="favorite"
+                    class="radio-btn"
+                    slot="start"
+                    value="{{ class.class_id }}"
+                    (ionSelect)="selectStandard('radio', class, i)"
+                  ></ion-radio>
+                </ion-item>
+              </ng-container>
+            </ion-radio-group>
+          </ion-list>
+        </div>
+      </ion-item>
+
+      <ion-item
+        *ngIf="(toggleMultigrade || showMonograde) && mediumInfoList.length"
+        class="border"
+      >
+        <ion-label [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+          this.med
+        }}</ion-label>
+        <ion-select
+          multiple="true"
+          [cancelText]="this.cancel"
+          [okText]="this.ok"
+          [value]="this.selectedMediumIds"
+          (ionChange)="mediumSelectHandler($event)"
+        >
+          <ion-select-option
+            *ngFor="let mediumData of mediumInfoList"
+            [value]="mediumData.medium_id"
+          >
+            {{ mediumData.medium }}</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+
+      <ion-item
+        *ngIf="(toggleMultigrade || showMonograde) && !mediumInfoList.length"
+        class="border"
+      >
+        <ion-label [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+          this.med
+        }}</ion-label>
+        <ion-select
+          multiple="true"
+          [cancelText]="this.cancel"
+          [okText]="this.ok"
+          [value]="this.selectedMediumIds"
+          (ionChange)="mediumSelectHandler($event)"
+        >
+          <ion-select-option value="" disabled>{{
+            this.noMedium
+          }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- <ion-item *ngIf="(toggleMultigrade || showMonograde) && (!subjectList.length)" class="border">
+        <ion-select [(ngModel)]="selectedSubject" (ngModelChange)="sectionHandler($event)">
+          <ion-select-option value="undefined" disabled selected>{{this.noSubject}}</ion-select-option>
+        </ion-select>
+      </ion-item> -->
+
+      <ion-item
+        *ngIf="(toggleMultigrade || showMonograde) && subjectList.length"
+        class="border"
+      >
+        <ion-label> {{ this.selectSubject }} </ion-label>
+        <ion-select
+          [(ngModel)]="selectedSubject"
+          (ngModelChange)="subjectSelectHandler($event)"
+        >
+          <!-- <ion-select-option value="undefined" disabled selected>{{
+            this.selectSubject
+          }}</ion-select-option> -->
+          <ion-select-option
+            *ngFor="let subjectData of subjectList"
+            [value]="subjectData"
+            >{{ subjectData.subject }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- <ion-item *ngIf="showMonograde && !sectionList.length" class="border">
+          <ion-select [(ngModel)]="selectedSection" (ngModelChange)="sectionHandler($event)">
+            <ion-select-option value="undefined" disabled selected>{{this.noSection}}</ion-select-option>
+          </ion-select>
+      </ion-item> -->
+
+      <ion-item *ngIf="showMonograde && sectionList.length" class="border">
+        <ion-label> {{ this.selectSection }} </ion-label>
+        <ion-select
+          [(ngModel)]="selectedSection"
+          (ngModelChange)="sectionHandler($event)"
+        >
+          <!-- <ion-select-option value="undefined" disabled selected>{{this.selectSection}}</ion-select-option> -->
+          <ion-select-option
+            *ngFor="let section of sectionList"
+            [value]="section"
+            >{{ section }}</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+
+<ion-footer style="height: 50px;">
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button
+        class="btn-back"
+        [routerLink]="['/page-route/teacher-selection']"
+      >
+        <ion-label
+          [ngClass]="{
+            'ta-font': this.languageType === 'ta',
+            'fs-16': this.languageType === 'ta'
+          }"
+          >{{ this.back }}
+        </ion-label>
+      </ion-tab-button>
+      <ion-tab-button class="btn-next" (click)="goToStudentAttendance()">
+        <ion-label
+          [ngClass]="{
+            'ta-font': this.languageType === 'ta',
+            'fs-16': this.languageType === 'ta'
+          }"
+          >{{ this.next }}
+        </ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-footer>

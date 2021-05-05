@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Classes Information</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-label padding>Select the Class</ion-label><br/>
+  <ion-grid>
+  <ion-card *ngFor="let class of data_value;let i=index; let class_even=even;let class_odd=odd">
+      <ion-row [ngClass]={class_even:class_even,class_odd:class_odd}>
+      <ion-col size="4" *ngFor="let sec of class.sections;let first=first;let chilIndex=index; let sec_even=even;let sec_odd=odd" >
+          <ion-ripple-effect></ion-ripple-effect>
+        <ion-card (click)="onClick(class,chilIndex)" [ngClass]={sec_even:sec_even,sec_odd:sec_odd} [style.background-color]="chilIndex < 1 ? randomColor[i] : ''">  
+           
+          <div style="font-size:16px;"><b>{{class.class_name}} </b><span style="font-size:16px;">'{{sec.section}}'</span></div>
+          <div style="font-size:13px;"><ion-icon name="man"></ion-icon>{{sec.male}} <span style="font-size:13px;"><ion-icon name="woman"></ion-icon>{{sec.female}}</span></div>   
+        </ion-card>
+    
+      </ion-col>
+      <!-- <ion-col size="3">
+          <ion-card routerLink="/page-route/student-attendance" routerDirection="root" class="insidecard" style="background-color: #3cbb8c;">
+            <div style="font-size:16px;"><b>1 </b><span style="font-size:11px;">STD</span></div>
+            <div style="font-size:16px;"><b>B </b><span style="font-size:11px;">SEC</span></div>
+          </ion-card>
+        </ion-col> -->
+    </ion-row>
+  </ion-card>
+</ion-grid>
+  <!-- <ion-grid fixed="true">
+    <ion-row>
+      <ion-col size="2">
+        No.
+      </ion-col>
+      <ion-col size="3">Name
+      </ion-col>
+  
+      <ion-col size="5"> Student Strength</ion-col>
+      <ion-col text-right size="2"> Total</ion-col>
+    
+    </ion-row >
+   
+      <ion-row  align-items-center *ngFor="let class of school_data;let i=index;let even=even;let odd=odd" style="height:60px;color:black;margin-top:5px;" (click)="onClick(class)">
+        <ion-ripple-effect></ion-ripple-effect>
+          <ion-item-divider [ngClass]="{even:even,odd:odd}"  >
+         
+          <ion-col size="2">
+          <p>  {{i+1}} </p>
+          </ion-col>
+          <ion-col size="2" align-self-center >
+        <p> {{class.class_studying_id}} '{{class.class_section}}'</p>
+          </ion-col>
+          <ion-col size="6"  text-center>
+             <span *ngIf="class.male !=0"> <ion-icon name="man" color="secondary" style="font-size:30px;"></ion-icon >{{class.male}} </span><span *ngIf="class.female !=0"><ion-icon name="woman" color="secondary" style="font-size:30px;"></ion-icon>{{class.female}} </span></ion-col>
+            <ion-col size="2" text-right>
+          <p> {{class.total}}</p></ion-col>
+          </ion-item-divider>
+        </ion-row>
+    
+  </ion-grid> -->
+</ion-content>

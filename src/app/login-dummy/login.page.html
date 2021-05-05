@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <!-- <ion-menu-button></ion-menu-button> -->
+          <ion-back-button color="danger"></ion-back-button>
+        </ion-buttons>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-label><h1>{{value}}</h1></ion-label>
+<ion-button  full (click)="captureImage()">Capture Image</ion-button>
+<ion-button  full color="secondary" (click)="addImageWatermark()" [disabled]="!blobImage">Add Image Watermark</ion-button>
+<ion-button  full color="secondary" (click)="addTextWatermark()" >Add Text Watermark</ion-button>
+<ion-button full color="danger" (click)="pageLogin()">Login</ion-button>
+<ion-card *ngIf="originalImage">
+  <ion-card-header>Original</ion-card-header>
+  <ion-card-content>
+    <img [src]="originalImage">
+  </ion-card-content>
+</ion-card>
+
+<ion-card >
+  <ion-card-header>Watermarked</ion-card-header>
+  <ion-card-content>
+    <img #previewimage imageViewer>
+  </ion-card-content>
+  <img src="{{waterMarkedImg}}" imageViewer>
+</ion-card>
+</ion-content>

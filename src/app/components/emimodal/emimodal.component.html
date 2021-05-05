@@ -1,0 +1,38 @@
+<ion-content>
+<div class="modalcontent-wrapper">
+    <ion-text color="" class="ion-text-center pt-2">
+        <p [ngClass]="{'ta-font': this.languageType === 'ta'}">{{this.correctionIn}} {{correction!= 'undefined'? this.showCategory:'None'}}</p>
+      </ion-text>
+   <ion-list lines="none">
+          <ion-item>
+            <ion-label><span [ngClass]="{'ta-font': this.languageType === 'ta'}"> {{this.listed_Value}}</span> :<br>{{listedValue}} </ion-label>
+              <!--Basic: auto-select the icon based on the platform -->
+ 
+          </ion-item>
+          <ion-item>
+                  <ion-label><span [ngClass]="{'ta-font': this.languageType === 'ta'}">{{this.actual_Value}}</span> : <br>
+                  
+                      <div *ngIf="!(divisionType === 'teacher_count' || divisionType === 'student_count' || divisionType === 'count')" class="select_box">
+                      <select ngModel (ngModelChange)="mySelectHandler($event,i)">
+                          <option value="" disabled selected hidden>{{this.chooseItem}}</option>
+                    
+                          <option *ngFor="let data of actualValue" [ngValue]="data">{{data.item}}</option>
+      
+                      </select>
+                      </div>
+                      <div  *ngIf="(divisionType === 'teacher_count' || divisionType === 'student_count' || divisionType === 'count')" class="input-icons">
+                      <input type="number" name="lname" class="w-100" [(ngModel)]="this.selectedValue" [placeholder]="this.actual_Value"/>
+                  
+                      </div>
+
+
+         </ion-label>
+            </ion-item>
+      
+          </ion-list>
+         <div class="d-flex justify-content-center">
+          <ion-button class="btn_modal-cancel" (click)="dismiss('Cancel')"  [ngClass]="{'ta-font': this.languageType === 'ta','fs-11': this.languageType === 'ta','modal-btn-w-50': this.languageType === 'ta'}">{{this.cancel}}</ion-button>
+          <ion-button  class="btn_modal-success" (click)="dismiss(this.selectedValue)"  [ngClass]="{'ta-font': this.languageType === 'ta','fs-11': this.languageType === 'ta','modal-btn-w-50': this.languageType === 'ta'}">{{this.submit}}</ion-button>
+          </div>
+         </div>
+  </ion-content>

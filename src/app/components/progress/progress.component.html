@@ -1,0 +1,10 @@
+<!-- 
+<ion-progress-bar value="0.5"></ion-progress-bar> -->
+
+
+<div class="progress-outer position-relative">
+    <div class="progress-inner" [style.width.%]="progress" >
+   
+    </div>
+    <p class="percentage-value">{{progress}}% <span [ngClass]="{'ta-font': this.languageType === 'ta','fs-14': this.languageType === 'ta'}">{{this.completed}}</span></p>
+</div>

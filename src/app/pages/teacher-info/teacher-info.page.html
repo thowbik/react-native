@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Teacher Information</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="teacherInfoForm">
+    <ion-card padding position="center">
+    <!-- <ion-item>
+        <ion-label text-wrap position="floating">Number of Teachers Sanctioned for the School</ion-label><br/>
+        <ion-input type="Number" formControlName="teachers_sanctioned" ></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label position="floating">Actual Number of Teachers Alloted</ion-label>
+          <ion-input type="Number" formControlName="teachers_alloted"  disabled></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Staff Attendance</ion-label>
+            <ion-input type="Number" formControlName="staff_attendance"></ion-input>
+          </ion-item> --><br/>
+          <!-- <ion-label class="label">Number of Teachers Sanctioned for the School</ion-label><br/>
+          <ion-input class="input" type="Number" formControlName="teachers_sanctioned"></ion-input><br/><br/> -->
+          <ion-label class="label">Total teachers in the school</ion-label><br/>
+          <ion-input class="input" type="Number" formControlName="teachers_alloted" disabled></ion-input><br/><br/>
+          <ion-label class="label">Total present in the school</ion-label>
+          <ion-input class="input" type="Number" formControlName="staff_attendance"></ion-input><br/>
+
+        </ion-card>
+        <ion-card>
+          <ion-card-title></ion-card-title>
+          <h4>Class room observation is to be done within 90 minutes
+          </h4>
+        </ion-card>
+        </form>
+</ion-content>
+<ion-footer  class="foot" translucent="true">
+      <ion-button shape="round" expand="full" size="default" (click)="onSubmit()" class="login_button" router>Next<ion-icon name="arrow-forward"></ion-icon></ion-button>
+  </ion-footer>

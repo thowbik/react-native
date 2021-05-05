@@ -1,0 +1,130 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-buttons slot="">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+        </ion-col>
+        <ion-col class="">
+          <ion-title class="ion-text-center" [ngClass]="{'ta-font': this.languageType === 'ta'}">
+            <b>{{this.teacher}}<br>{{this.Selection}}<br>
+            </b>
+          </ion-title>
+        </ion-col>
+        <ion-col>
+          <app-notification></app-notification>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <app-progress [progress]="this.progressValue"></app-progress>
+  <div class="content-wrapper">
+
+    <ion-text color="" class="ion-text-center pt-2">
+      <p class="color-dgrey"> {{schoolInfo?.schoolName}} </p>
+      <p class="color-dgrey"><b><span
+            [ngClass]="{'ta-font': this.languageType === 'ta'}">{{this.todayObserving}}</span><br>
+          {{teacherDetails?.teacher_name}} [{{teacherDetails?.teacher_emisid}}]</b></p>
+
+    </ion-text>
+
+
+    <ion-list lines="none">
+      <p class="text-center mb-0" [ngClass]="{'ta-font': this.languageType === 'ta'}">{{this.proceedObservation}}?</p>
+      <ion-radio-group [(ngModel)]="checkedValue">
+        <div class="radio-toggle">
+          <ion-item>
+            <ion-radio color="favorite" value="true" (ionSelect)="addData(true);regularTeacher=true;showDropdown=true">
+            </ion-radio>
+            <ion-label class="color-dgrey pl-1" [ngClass]="{'ta-font': this.languageType === 'ta'}">{{yes}}
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-radio color="favorite" value="false"
+              (ionSelect)="addData(false);regularTeacher=false;showDropdown=true"></ion-radio>
+            <ion-label class="color-dgrey pl-1" [ngClass]="{'ta-font': this.languageType === 'ta'}">{{no}}
+            </ion-label>
+          </ion-item>
+        </div>
+
+      </ion-radio-group>
+    </ion-list>
+
+    <ion-list lines="none">
+      <div *ngIf="regularTeacher && showDropdown">
+        <p class="color-lgrey pl-3" [ngClass]="{'ta-font': this.languageType === 'ta'}">{{this.emiIdVerify}}</p>
+
+        <ion-grid class="p-0">
+          <ion-row>
+            <ion-col size="7" class="p-0">
+              <ion-item>
+                <ion-text color="" class="">
+                  <p class=""><b>{{teacherDetails.teacher_name}} </b></p>
+                  <input type="number" [(ngModel)]="teacher_id" class="w-100" disabled />
+                </ion-text>
+              </ion-item>
+            </ion-col>
+            <ion-col class="col-icon my-auto p-0">
+              <ion-icon name="checkmark" class="text-success" (click)="proceedCheck('correct')"
+                [ngClass]="!isChanged && changedValue !== '' ? 'opacity_one':'opacity_not_one'"></ion-icon>
+
+              <!-- <ion-icon name="checkmark" class="text-success"></ion-icon> -->
+              <ion-icon name="close" class="text-danger"
+                (click)="presentModald(teacherDetails.teacher_emisid,'count','ID','ID')"
+                [ngClass]="isChanged && changedValue!== '' ? 'opacity_one' : 'opacity_not_one'"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <ion-text color="dark" class="text-italic">
+          <p *ngIf="this.languageType === 'en'" class="fs-12 p-2"><span>{{this.Note}}</span>: {{this.doIt}}
+            {{this.teacherDetails?.teacher_name}}'s {{this.takeAttendance}}</p>
+
+          <p *ngIf="this.languageType === 'ta'" class="fs-12 p-2"><span
+              [ngClass]="{'ta-font': this.languageType === 'ta'}">{{this.Note}}</span>:{{this.takeAttendance}}
+            {{this.teacherDetails?.teacher_name}} {{this.doIt}}</p>
+          <!-- <p class="fs-12 p-2"><span [ngClass]="{'ta-font': this.languageType === 'ta'}">{{Note}}</span>: Proceed to {{teacherDetails.teacher_name}}’s class to take attendance</p> -->
+        </ion-text>
+      </div>
+      <div *ngIf="!regularTeacher && showDropdown">
+        <ion-item>
+          <div class="select_box">
+            <select [(ngModel)]="selectedReason" (ngModelChange)="mySelectReason($event)">
+              <option [ngValue]="undefined" disabled selected>{{this.giveReason}}</option>
+              <option *ngFor="let reason_info of teacherReasons" [ngValue]="reason_info.reason">{{reason_info.reason}}
+              </option>
+              <option value="">{{this.noneAbove}}</option>
+            </select>
+
+          </div>
+        </ion-item>
+        <ion-text color="dark" class="text-italic">
+          <p class="fs-12 p-2"><span [ngClass]="{'ta-font': this.languageType === 'ta'}">{{Note}}</span>: Proceed to
+            {{teacherDetails.teacher_name}}’s class to take attendance</p>
+        </ion-text>
+
+      </div>
+    </ion-list>
+  </div>
+</ion-content>
+<ion-footer style="height:50px;">
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button class="btn-back" (click)="backToEmiVerify()">
+        <ion-label [ngClass]="{'ta-font': this.languageType === 'ta','fs-16': this.languageType === 'ta'}">{{this.back}}
+        </ion-label>
+      </ion-tab-button>
+      <ion-tab-button class="btn-next" (click)="goToClassroom()" [disabled]="btnDisabled">
+        <ion-label [ngClass]="{'ta-font': this.languageType === 'ta','fs-16': this.languageType === 'ta'}">
+          {{this.start}}</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+  <!-- <ion-text ><p style="text-align: center;color:white;font-size: 25px;line-height: 3px;">Next</p></ion-text> -->
+</ion-footer>

@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-contentbg">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+          <ion-slides #IonSlides pager="true" [options]="options" (ionSlidesDidLoad)="slidesDidLoad(IonSlides)">
+              <ion-slide>
+                 <ion-img src="../../assets/img/studying.png"></ion-img>
+                </ion-slide>          
+              <ion-slide>
+                  <ion-img src="../../assets/img/stuparent.png"></ion-img>
+              </ion-slide>
+              <ion-slide>
+                  <ion-img src="../../assets/img/Teacher.png"></ion-img>
+              </ion-slide>
+          </ion-slides>
+          <!-- <ion-card routerLink="/student-attendance" routerDirection="root">
+            <ion-card-header style="text-align:center;padding: 0px !important;">
+              <ion-card-title><img src="../../assets/pencil.jpg"></ion-card-title>
+            </ion-card-header>  
+          </ion-card> -->
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+          <ion-card routerLink="/page-route/observation-list" routerDirection="forward">
+              <ion-card-header style="text-align:center;">
+                <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
+                <ion-card-title> <ion-icon name="eye"></ion-icon></ion-card-title>
+              </ion-card-header>  
+              <ion-card-content style="text-align:center;">
+                  OBSERVATIONS
+              </ion-card-content>
+            </ion-card>
+      </ion-col>
+       <!-- <ion-col size="4">
+          <ion-card routerLink="/ipage-route/student-class-list" routerDirection="root">
+            <ion-card-header style="text-align:center;">
+             
+              <ion-card-title> <ion-icon name="checkmark-circle-outline"></ion-icon></ion-card-title>
+            </ion-card-header>  
+            <ion-card-content style="text-align:center;">
+              STUDENT ATTENDANCE
+            </ion-card-content>
+          </ion-card>
+      </ion-col>
+      <ion-col size="4">
+        <ion-card routerLink="/page-route/staff-attendance" routerDirection="root">
+          <ion-card-header style="text-align:center;">
+           
+            <ion-card-title> <ion-icon name="checkmark-circle-outline"></ion-icon></ion-card-title>
+          </ion-card-header>  
+          <ion-card-content style="text-align:center;">
+            STAFF ATTENDANCE
+          </ion-card-content>
+        </ion-card>
+    </ion-col>
+      <ion-col size="4">
+          <ion-card routerLink="/student-attendance" routerDirection="root">
+            <ion-card-header style="text-align:center;">
+            
+              <ion-card-title><ion-icon name="book"></ion-icon></ion-card-title>
+            </ion-card-header>  
+            <ion-card-content style="text-align:center;">
+                RESOURCES
+            </ion-card-content>
+          </ion-card>
+      </ion-col>
+      <ion-col size="4">
+          <ion-card routerLink="/student-attendance" routerDirection="root">
+            <ion-card-header style="text-align:center;">
+            
+              <ion-card-title><ion-icon name="notifications"></ion-icon></ion-card-title>
+            </ion-card-header>  
+            <ion-card-content style="text-align:center;">
+                CIRCULARS
+            </ion-card-content>
+          </ion-card>
+      </ion-col> -->
+    </ion-row> 
+</ion-grid>  
+</ion-content>

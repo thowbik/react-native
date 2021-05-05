@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+    <ion-title>Final Remarks</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <form [formGroup]="final_remarks_form">
+        <ion-card padding>
+          
+            <!-- <ion-label>What are some recommended action items for the classroom</ion-label>
+            <ion-input class="input" type="text" placeholder="(Enter Two)" formControlName="recomend_class_action"></ion-input><br/> -->
+            <!-- <ion-item> -->
+              <!-- <ion-label>Is there evidence of teacher having followed the recommended action items from last visit</ion-label> -->
+     
+               <!-- <ion-label class="label" position="stacked">Is there evidence of teacher having followed the recommended action items from last visit
+                 </ion-label><br/>
+               <ion-select class="select" placeholder="Select" interface="popover" formControlName="teacher_last_visit">
+                   <ion-select-option  value="yes">Yes</ion-select-option>
+                   <ion-select-option  value="no">NO</ion-select-option>
+                   <ion-select-option  value="na">Not Applicable</ion-select-option>
+               </ion-select><br/> -->
+               <ion-label>Final Remarks</ion-label>
+               <ion-textarea class="text-area" type="text" placeholder="Remarks" formControlName="final_remarks"></ion-textarea><br/>
+            <!-- </ion-item> -->
+           <!-- <ion-card-header>
+             <ion-card-title>Rating of the Student</ion-card-title>
+           </ion-card-header>
+           <ion-card-content>
+               <rating [rate]="rate"
+               formControlName="rating"
+               readonly="false"
+               size="default"
+               (rateChange)="onRateChange($event)">
+             </rating>
+             <ion-label class="rating_label" [style.color]="ratingDescription.color">{{ratingDescription.value}}</ion-label>
+           </ion-card-content> -->
+         </ion-card> 
+      </form>
+      </ion-content>
+      
+
+<ion-footer>
+  <!-- <ion-row> -->
+    <!-- <ion-col> -->
+      <ion-button color="primary" expand="full" (click)="onSubmit()">Save </ion-button>
+    <!-- </ion-col> -->
+    <!-- <ion-col>
+      <ion-button color="primary" expand="block" (click)="continue()">Save & Continue</ion-button>
+    </ion-col> -->
+  <!-- </ion-row> -->
+</ion-footer>

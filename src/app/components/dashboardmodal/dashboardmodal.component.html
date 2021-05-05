@@ -1,0 +1,101 @@
+<ion-content>
+  <div class="modalcontent-wrapper">
+    <ion-text color="" class="ion-text-center pt-2">
+      <p
+        class="color-dgrey"
+        [ngClass]="{
+          'ta-font': this.languageType === 'ta',
+          'fs-9': this.languageType === 'ta',
+          'fs-12': this.languageType === 'en'
+        }"
+      >
+        {{ this.schoolsReason }}
+      </p>
+    </ion-text>
+    <ion-list lines="none">
+      <ion-item *ngFor="let school of unVisitedSchoolList; let i = index">
+        <ion-label class="color-dgrey fs-12"
+          >{{ school.school_name }}:
+          <div *ngIf="selectedReason[i] != 'Others'" class="select_box">
+            <select
+              ngModel
+              (ngModelChange)="mySelectHandler($event, i, school)"
+            >
+              <option value="" disabled selected hidden>{{
+                this.reason
+              }}</option>
+
+              <option
+                *ngFor="let reason_info of schoolReasons"
+                [ngValue]="reason_info.reason"
+                >{{ reason_info.reason }}
+              </option>
+            </select>
+          </div>
+          <div *ngIf="selectedReason[i] == 'Others'" class="input-icons">
+            <ion-icon
+              name="close"
+              class="text-danger"
+              (click)="mySelectHandler('none', i, school)"
+            ></ion-icon>
+            <input
+              type="text"
+              name="lname"
+              class="w-100"
+              (change)="inputHandler('input', $event.target.value, i, school)"
+              placeholder="Others"
+              disabled
+            />
+          </div>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div class="px-2">
+    <ion-label class="color-black"
+      ><b
+        [ngClass]="{
+          'ta-font': this.languageType === 'ta',
+          'fs-10': this.languageType === 'ta',
+          'fs-11': this.languageType === 'en'
+        }"
+      >
+        {{ this.visitSchool }}</b
+      >
+      <div class="select_box plan">
+        <select ngModel (ngModelChange)="planToVisitSchool($event)">
+          <option value="" disabled selected>{{ this.chooseSchool }}</option>
+          <option *ngFor="let school of allSchoolList" [ngValue]="school">{{
+            school.school_name
+          }}</option>
+        </select>
+      </div>
+    </ion-label>
+  </div>
+  <div class="modalcontent-wrapper">
+    <div class="d-flex justify-content-center">
+      <ion-button
+        class="btn_modal-cancel"
+        (click)="dismiss('Cancel')"
+        [ngClass]="{
+          'ta-font': this.languageType === 'ta',
+          'fs-11': this.languageType === 'ta',
+          'modal-btn-w-50': this.languageType === 'ta'
+        }"
+      >
+        {{ this.cancel }}</ion-button
+      >
+      <ion-button
+        class="btn_modal-success"
+        (click)="dismiss('Submit')"
+        [ngClass]="{
+          'ta-font': this.languageType === 'ta',
+          'fs-11': this.languageType === 'ta',
+          'modal-btn-w-50': this.languageType === 'ta'
+        }"
+      >
+        {{ this.submit }}</ion-button
+      >
+    </div>
+  </div>
+</ion-content>

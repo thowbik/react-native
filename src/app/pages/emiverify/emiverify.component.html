@@ -1,0 +1,596 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-buttons slot="">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+        </ion-col>
+        <ion-col class="t-8">
+          <ion-title class="ion-text-center fs-18"
+            ><b
+              >EMIS
+              <span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+                this.Verification
+              }}</span></b
+            >
+          </ion-title>
+        </ion-col>
+        <ion-col>
+          <app-notification></app-notification>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <app-progress [progress]="0"></app-progress>
+
+  <ion-text color="" class="ion-text-center pt-2">
+    <p class="pt-2 color-dgrey">
+      {{ schoolDetails?.school_name }} <b>[{{ schoolDetails?.cate_type }}]</b>
+    </p>
+  </ion-text>
+  <!-- List of Text Items -->
+
+  <ion-grid>
+    <ion-row class="ion-row-list">
+      <ion-col size="9">
+        <ion-label class="color-dgrey fs-14 c_pl-2"
+          ><span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+            this.district
+          }}</span>
+          :<br />
+          <b>
+            <span class="fs-14 c_pl-2" *ngIf="correctedDistrict == ''">{{
+              schoolDetails?.district_name
+            }}</span>
+            <span class="fs-14 c_pl-2" *ngIf="correctedDistrict != ''"
+              ><s>{{ schoolDetails?.district_name }}</s></span
+            >
+          </b>
+          <br /><b>{{ correctedDistrict != "" ? correctedDistrict : "" }}</b>
+        </ion-label>
+      </ion-col>
+      <ion-col class="col-icon my-auto">
+        <ion-icon
+          name="checkmark"
+          class="text-success"
+          (click)="
+            checkActualData('district', actualDetails?.dist_id);
+            listedDistrict = true;
+            correctedDistrict = ''
+          "
+          [ngClass]="
+            correctedDistrict == '' && listedDistrict == true
+              ? 'opacity_one'
+              : 'opacity_not_one'
+          "
+        ></ion-icon>
+        <ion-icon
+          name="close"
+          class="text-danger"
+          [ngClass]="
+            correctedDistrict !== '' ? 'opacity_one' : 'opacity_not_one'
+          "
+          (click)="
+            presentModal(
+              schoolDetails?.district_name,
+              'district',
+              'DISTRICT',
+              this.district
+            )
+          "
+        ></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-row-list-none">
+      <ion-col size="9">
+        <ion-label class="color-dgrey fs-14 c_pl-2"
+          ><span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+            this.educationalDistrict
+          }}</span>
+          :<br />
+          <b>
+            <span class="fs-14 c_pl-2" *ngIf="correctedEduDistrict == ''">{{
+              schoolDetails?.edu_dist_name
+            }}</span>
+            <span class="fs-14 c_pl-2" *ngIf="correctedEduDistrict != ''"
+              ><s>{{ schoolDetails?.edu_dist_name }}</s></span
+            >
+          </b>
+          <br /><b>
+            {{ correctedEduDistrict != "" ? correctedEduDistrict : "" }}
+          </b>
+        </ion-label>
+      </ion-col>
+      <ion-col class="col-icon my-auto">
+        <ion-icon
+          name="checkmark"
+          class="text-success"
+          (click)="
+            checkActualData('edu_district', actualDetails?.edu_dist_id);
+            listedEduDistrict = true;
+            correctedEduDistrict = ''
+          "
+          [ngClass]="
+            correctedEduDistrict == '' && listedEduDistrict == true
+              ? 'opacity_one'
+              : 'opacity_not_one'
+          "
+        ></ion-icon>
+        <ion-icon
+          name="close"
+          class="text-danger"
+          [ngClass]="
+            correctedEduDistrict !== '' ? 'opacity_one' : 'opacity_not_one'
+          "
+          (click)="
+            presentModal(
+              schoolDetails?.edu_dist_name,
+              'edu_district',
+              'EDUCATIONAL DISTRICT',
+              this.educationalDistrict
+            )
+          "
+        >
+        </ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-row-list">
+      <ion-col size="9">
+        <ion-label class="color-dgrey fs-14 c_pl-2"
+          ><span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+            this.block
+          }}</span>
+          : <br /><b>
+            <span class="fs-14 c_pl-2" *ngIf="correctedBlock == ''">{{
+              schoolDetails?.block_name
+            }}</span>
+            <span class="fs-14 c_pl-2" *ngIf="correctedBlock != ''"
+              ><s>{{ schoolDetails?.block_name }}</s></span
+            >
+          </b>
+          <br /><b>{{ correctedBlock != "" ? correctedBlock : "" }}</b>
+        </ion-label>
+      </ion-col>
+      <ion-col class="col-icon my-auto">
+        <ion-icon
+          name="checkmark"
+          class="text-success"
+          (click)="
+            checkActualData('block', actualDetails?.block_id);
+            listedBlock = true;
+            correctedBlock = ''
+          "
+          [ngClass]="
+            correctedBlock == '' && listedBlock == true
+              ? 'opacity_one'
+              : 'opacity_not_one'
+          "
+        ></ion-icon>
+        <ion-icon
+          name="close"
+          class="text-danger"
+          [ngClass]="correctedBlock !== '' ? 'opacity_one' : 'opacity_not_one'"
+          (click)="
+            presentModal(
+              schoolDetails?.block_name,
+              'block',
+              'BLOCK',
+              this.block
+            )
+          "
+        ></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-row-list-none">
+      <ion-col size="9">
+        <ion-label class="color-dgrey fs-14 c_pl-2"
+          ><span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+            this.zone
+          }}</span
+          >/ NODE : <br /><b>
+            <span class="fs-14 c_pl-2" *ngIf="correctedZone == ''">{{
+              schoolDetails?.nodal_name
+            }}</span>
+            <span class="fs-14 c_pl-2" *ngIf="correctedZone != ''"
+              ><s>{{ schoolDetails?.nodal_name }}</s></span
+            >
+          </b>
+          <br /><b>{{ correctedZone != "" ? correctedZone : "" }}</b>
+        </ion-label>
+      </ion-col>
+      <ion-col class="col-icon my-auto">
+        <ion-icon
+          name="checkmark"
+          class="text-success"
+          (click)="
+            checkActualData('zone', actualDetails?.nodal_id);
+            listedZone = true;
+            correctedZone = ''
+          "
+          [ngClass]="
+            correctedZone == '' && listedZone == true
+              ? 'opacity_one'
+              : 'opacity_not_one'
+          "
+        ></ion-icon>
+        <ion-icon
+          name="close"
+          class="text-danger"
+          [ngClass]="correctedZone !== '' ? 'opacity_one' : 'opacity_not_one'"
+          (click)="
+            presentModal(
+              schoolDetails?.nodal_name,
+              'zone',
+              'ZONE / NODE',
+              this.zone
+            )
+          "
+        ></ion-icon>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-row-list">
+      <ion-col size="9">
+        <ion-label class="color-dgrey fs-14 c_pl-2"
+          ><span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+            this.studentsTotal
+          }}</span>
+          :<br />
+          <b>
+            <span class="fs-14 c_pl-2" *ngIf="correctedTotalStudents == ''">{{
+              schoolDetails?.total_students
+            }}</span>
+            <span class="fs-14 c_pl-2" *ngIf="correctedTotalStudents != ''"
+              ><s>{{ schoolDetails?.total_students }}</s></span
+            >
+          </b>
+          <br /><b>{{
+            correctedTotalStudents != "" ? correctedTotalStudents : ""
+          }}</b>
+        </ion-label>
+      </ion-col>
+      <ion-col class="col-icon my-auto">
+        <ion-icon
+          name="checkmark"
+          class="text-success"
+          (click)="
+            checkActualData('student_count', actualDetails?.total_students);
+            listedTotalStudents = true;
+            correctedTotalStudents = ''
+          "
+          [ngClass]="
+            correctedTotalStudents == '' && listedTotalStudents == true
+              ? 'opacity_one'
+              : 'opacity_not_one'
+          "
+        >
+        </ion-icon>
+        <ion-icon
+          name="close"
+          class="text-danger"
+          [ngClass]="
+            correctedTotalStudents !== '' ? 'opacity_one' : 'opacity_not_one'
+          "
+          (click)="
+            presentModal(
+              schoolDetails?.total_students,
+              'student_count',
+              'No. of students enrolled',
+              this.studentsTotal
+            )
+          "
+        >
+        </ion-icon>
+      </ion-col>
+    </ion-row>
+
+    <section *ngFor="let classItem of classList; let i = index">
+      <ion-row class="ion-row-list-none">
+        <ion-col size="9">
+          <ion-label class="color-dgrey fs-14 c_pl-2"
+            ><span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+              this.class
+            }}</span>
+            {{ classItem.class }} - #
+            <span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+              this.boysTotal
+            }}</span>
+            :<br />
+            <b>
+              <span
+                class="fs-14 c_pl-2"
+                *ngIf="correctedClass[i].showCorrected_Boys == false"
+                >{{ classItem.boys }}</span
+              >
+              <span
+                class="fs-14 c_pl-2"
+                *ngIf="correctedClass[i].showCorrected_Boys == true"
+                ><s>{{ classItem.boys }}</s></span
+              >
+            </b>
+            <br /><b>{{
+              correctedClass[i].showCorrected_Boys == true
+                ? correctedClass[i].boys
+                : ""
+            }}</b>
+          </ion-label>
+        </ion-col>
+        <ion-col class="col-icon my-auto">
+          <ion-icon
+            name="checkmark"
+            class="text-success"
+            (click)="
+              correctedClass[i].listetClassBoys = true;
+              correctedClass[i].showCorrected_Boys = false
+            "
+            [ngClass]="
+              correctedClass[i].listetClassBoys == true
+                ? 'opacity_one'
+                : 'opacity_not_one'
+            "
+          ></ion-icon>
+          <ion-icon
+            name="close"
+            class="text-danger"
+            [ngClass]="
+              correctedClass[i].showCorrected_Boys == true
+                ? 'opacity_one'
+                : 'opacity_not_one'
+            "
+            (click)="
+              presentModal(
+                classItem.boys,
+                'count',
+                'Total boys',
+                this.boysTotal,
+                'boys',
+                i
+              )
+            "
+          ></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-row-list">
+        <ion-col size="9">
+          <ion-label class="color-dgrey fs-14 c_pl-2"
+            ><span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+              this.class
+            }}</span>
+            {{ classItem.class }} - #
+            <span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+              this.girlsTotal
+            }}</span>
+            :<br />
+            <b>
+              <span
+                class="fs-14 c_pl-2"
+                *ngIf="correctedClass[i].showCorrected_Girls == false"
+                >{{ classItem.girls }}</span
+              >
+              <span
+                class="fs-14 c_pl-2"
+                *ngIf="correctedClass[i].showCorrected_Girls == true"
+                ><s>{{ classItem.girls }}</s></span
+              >
+            </b>
+            <br /><b>{{
+              correctedClass[i].showCorrected_Girls == true
+                ? correctedClass[i].girls
+                : ""
+            }}</b>
+          </ion-label>
+        </ion-col>
+        <ion-col class="col-icon my-auto">
+          <ion-icon
+            name="checkmark"
+            class="text-success"
+            (click)="
+              correctedClass[i].listetClassGirls = true;
+              correctedClass[i].showCorrected_Girls = false
+            "
+            [ngClass]="
+              correctedClass[i].listetClassGirls == true
+                ? 'opacity_one'
+                : 'opacity_not_one'
+            "
+          ></ion-icon>
+          <ion-icon
+            name="close"
+            class="text-danger"
+            [ngClass]="
+              correctedClass[i].showCorrected_Girls == true
+                ? 'opacity_one'
+                : 'opacity_not_one'
+            "
+            (click)="
+              presentModal(
+                classItem.girls,
+                'count',
+                'Total girls',
+                this.girlsTotal,
+                'girls',
+                i
+              )
+            "
+          ></ion-icon>
+        </ion-col>
+      </ion-row>
+    </section>
+    <ion-row class="ion-row-list-none">
+      <ion-item>
+        <ion-label class="color-dgrey fs-14 c_pl-2"
+          ><b
+            ><span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+              this.teacherSanctioned
+            }}</span
+            >:</b
+          ><br />
+          <input
+            type="number"
+            required
+            [(ngModel)]="teacherSanctionedValue"
+            class="border"
+          />
+          <div
+            class="error"
+            *ngIf="
+              (teacherSanctionedValue === null ||
+                teacherSanctionedValue === undefined) &&
+              submitted
+            "
+          >
+            {{ this.teacherSanctionedRequired }}
+          </div>
+        </ion-label>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-row-list-none">
+      <ion-item>
+        <ion-label class="color-dgrey fs-14 c_pl-2"
+          ><b
+            ><span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+              this.teachersAvailable
+            }}</span
+            >:</b
+          ><br />
+          <input
+            type="number"
+            required
+            [(ngModel)]="teachersAvailableValue"
+            class="border"
+          />
+          <div
+            class="error"
+            *ngIf="
+              (teachersAvailableValue === null ||
+                teachersAvailableValue === undefined) &&
+              submitted
+            "
+          >
+            {{ this.teachersAvailableRequired }}
+          </div>
+        </ion-label>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-row-list-none">
+      <ion-item>
+        <ion-label class="color-dgrey fs-14 c_pl-2"
+          ><b
+            ><span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+              this.teachersDeputationSameSchool
+            }}</span
+            >:</b
+          ><br />
+          <input
+            type="number"
+            required
+            [(ngModel)]="teachersDeputationSameSchoolValue"
+            class="border"
+          />
+          <div
+            class="error"
+            *ngIf="
+              (teachersDeputationSameSchoolValue === null ||
+                teachersDeputationSameSchoolValue === undefined) &&
+              submitted
+            "
+          >
+            {{ this.teachersDeputationSameSchoolRequired }}
+          </div>
+        </ion-label>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-row-list-none">
+      <ion-item>
+        <ion-label class="color-dgrey fs-14 c_pl-2"
+          ><b
+            ><span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+              this.teachersDeputationOtherSchool
+            }}</span
+            >:</b
+          ><br />
+          <input
+            type="number"
+            required
+            [(ngModel)]="teachersDeputationOtherSchoolValue"
+            class="border"
+          />
+          <div
+            class="error"
+            *ngIf="
+              (teachersDeputationOtherSchoolValue === null ||
+                teachersDeputationOtherSchoolValue === undefined) &&
+              submitted
+            "
+          >
+            {{ this.teachersDeputationOtherSchoolRequired }}
+          </div>
+        </ion-label>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-row-list-none">
+      <ion-item>
+        <ion-label class="color-dgrey fs-14 c_pl-2"
+          ><b
+            ><span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+              this.teachersOnLongLeave
+            }}</span
+            >:</b
+          ><br />
+          <input
+            type="number"
+            required
+            [(ngModel)]="teachersOnLongLeaveValue"
+            class="border"
+          />
+          <div
+            class="error"
+            *ngIf="
+              (teachersOnLongLeaveValue === null ||
+                teachersOnLongLeaveValue === undefined) &&
+              submitted
+            "
+          >
+            {{ this.teachersOnLongLeaveRequired }}
+          </div>
+        </ion-label>
+      </ion-item>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer style="height: 50px; background-color: #2d9cdb;">
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button
+        class="btn-back"
+        [routerLink]="['/page-route/dashboardc']"
+      >
+        <ion-label
+          [ngClass]="{
+            'ta-font': this.languageType === 'ta',
+            'fs-14': this.languageType === 'ta'
+          }"
+          >{{ this.back }}
+        </ion-label>
+      </ion-tab-button>
+      <ion-tab-button class="btn-next" (click)="goToTeacherSelection()">
+        <ion-label
+          [ngClass]="{
+            'ta-font': this.languageType === 'ta',
+            'fs-14': this.languageType === 'ta'
+          }"
+          >{{ this.next }}
+        </ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+  <!-- <ion-button size="large">Large</ion-button>
+      <ion-button size="large">Large1</ion-button> -->
+
+  <!-- <ion-text ><p style="text-align: center;color:white;font-size: 25px;line-height: 3px;">Next</p></ion-text> -->
+</ion-footer>

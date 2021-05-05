@@ -1,0 +1,134 @@
+<ion-header>
+  <ion-toolbar class="pale-nave_blue">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-buttons slot="">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+        </ion-col>
+        <ion-col class="top-12">
+          <ion-title
+            class="ion-text-center fs-15"
+            [ngClass]="{ 'ta-font': this.languageType === 'ta' }"
+          >
+            <b>{{ this.studentAsessment }}</b>
+          </ion-title>
+        </ion-col>
+        <ion-col>
+          <app-notification></app-notification>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="">
+  <app-progress [progress]="this.progressValue"></app-progress>
+
+  <!--ITEM 1 START----------------------------------------------------->
+  <ion-text color="dark" class="text-italic">
+    <p
+      class="p-2 color-lgrey"
+      [ngClass]="{
+        'ta-font': this.languageType === 'ta',
+        'fs-10': this.languageType === 'ta',
+        'fs-12': this.languageType === 'en'
+      }"
+    >
+      {{ this.access_Info }}.
+    </p>
+  </ion-text>
+  <!-- List of Text Items -->
+  <ion-row
+    *ngFor="let randomStudent of randomStudentList; let i = index"
+    class="mt-2"
+    [ngClass]="
+      randomStudent.accessed == 'yes'
+        ? 'color-lgreen'
+        : randomStudent.accessed == 'no'
+        ? 'color-lpink'
+        : 'bg-grey '
+    "
+  >
+    <ion-col [size]="8">
+      <ion-label>
+        <b [ngClass]="{ 'fs-12': this.languageType === 'ta' }">
+          {{ randomStudent.name }}</b
+        >
+        :<br />
+        <p
+          style="padding-left: 1rem;"
+          [ngClass]="{
+            'ta-font': this.languageType === 'ta',
+            'fs-10': this.languageType === 'ta'
+          }"
+        >
+          {{ this.canAssessed }}?
+        </p>
+      </ion-label>
+    </ion-col>
+    <ion-col size="2" class="my-auto">
+      <ion-label
+        (click)="openAssessmentModal('view2', 'yes', randomStudent, i)"
+      >
+        <p
+          class="text-white m-0 text-center bg-green br-radius-45"
+          [ngClass]="{
+            opacity_one: this.randomStudentList[i].accessed == 'yes',
+            opacity_not_one: this.randomStudentList[i].accessed !== 'yes',
+            'ta-font': this.languageType === 'ta',
+            'fs-11': this.languageType === 'ta'
+          }"
+        >
+          <b>{{ this.yes }}</b>
+        </p>
+      </ion-label>
+    </ion-col>
+    <ion-col size="2" class="my-auto">
+      <ion-label (click)="openAssessmentModal('view1', 'no', randomStudent, i)">
+        <p
+          class="text-white m-0 text-center bg-red br-radius-45"
+          [ngClass]="{
+            opacity_one: this.randomStudentList[i].accessed == 'no',
+            opacity_not_one: this.randomStudentList[i].accessed !== 'no',
+            'ta-font': this.languageType === 'ta',
+            'fs-11': this.languageType === 'ta'
+          }"
+        >
+          <b>{{ this.no }}</b>
+        </p>
+      </ion-label>
+    </ion-col>
+  </ion-row>
+
+  <!--ITEM 1 END-------------------------------------------->
+</ion-content>
+
+<ion-footer style="height: 50px;">
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button
+        class="btn-back"
+        [routerLink]="['/page-route/assessment']"
+      >
+        <ion-label
+          [ngClass]="{
+            'ta-font': this.languageType === 'ta',
+            'fs-16': this.languageType === 'ta'
+          }"
+          >{{ this.back }}
+        </ion-label>
+      </ion-tab-button>
+      <ion-tab-button class="btn-next" (click)="goToStudentPerformance()">
+        <ion-label
+          [ngClass]="{
+            'ta-font': this.languageType === 'ta',
+            'fs-16': this.languageType === 'ta'
+          }"
+          >{{ this.next }}
+        </ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-footer>

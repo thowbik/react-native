@@ -1,0 +1,241 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-buttons slot="">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+        </ion-col>
+        <ion-col class="top-14">
+          <ion-title
+            class="ion-text-center fs-15"
+            [ngClass]="{ 'ta-font': this.languageType === 'ta' }"
+            ><b
+              >{{ this.Observation }} <br *ngIf="this.languageType == 'ta'" />{{
+                this.Report
+              }}</b
+            >
+          </ion-title></ion-col
+        >
+        <ion-col>
+          <app-notification></app-notification>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <app-progress [progress]="this.progressValue"></app-progress>
+
+  <div class="content-wrapper">
+    <!-- <ion-progress-bar value="0.5"></ion-progress-bar> -->
+    <!-- <ion-card (click)="expandItem(item)" *ngFor="let item of items">
+      <ion-card-header>
+        <ion-card-title>My Neighbor Totoro</ion-card-title>
+      </ion-card-header>
+  
+      <ion-card-content>
+        <app-expandable expandHeight="100px" [expanded]="item.expanded">
+          <p>
+            Hello there.
+          </p>
+          <p>
+            Hello there.
+          </p>
+          <p>
+            Hello there.
+          </p>
+          <p>
+            Hello there.
+          </p>
+          <p>
+            Hello there.
+          </p>
+          <p>
+            Hello there.
+          </p>
+        </app-expandable>
+      </ion-card-content>
+    </ion-card> -->
+
+    <!-- FIRST PAGE-->
+
+    <ion-text color="" class="ion-text-center pt-2">
+      <p class="fs-12">
+        <span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+          this.discussReport
+        }}</span
+        ><br /><b>
+          {{ teacherDetails.teacher_name }} [{{
+            teacherDetails.teacher_emisid
+          }}]
+        </b>
+      </p>
+    </ion-text>
+
+    <ion-text color="dark" class="">
+      <p>
+        <span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+          this.schoolObserved
+        }}</span>
+        : <b>{{ schoolDetails.schoolName }} {{ schoolDetails.eduDistName }}</b>
+      </p>
+      <p>
+        <span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+          this.standardObserved
+        }}</span>
+        :<b> {{ classDetails.class_id }}</b>
+      </p>
+
+      <p>
+        <span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+          this.studentTested
+        }}</span>
+        : <br />
+        <b> {{ chapterDetail }} </b>
+      </p>
+    </ion-text>
+
+    <ion-text color="dark">
+      <h5
+        class="text-center fs-12"
+        [ngClass]="{ 'ta-font': this.languageType === 'ta' }"
+      >
+        <b>{{ this.TodayReport }}</b>
+      </h5>
+    </ion-text>
+
+    <section>
+      <h5>
+        <span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+          this.areastrength
+        }}</span>
+        :
+      </h5>
+      <ul class="my-nav-1">
+        <li *ngFor="let strength of _areas.aos | slice: 0:5">
+          {{ strength.action_item_description }}
+        </li>
+      </ul>
+      <h5>
+        <span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+          this.areaImprovement
+        }}</span>
+        :
+      </h5>
+      <ul class="my-nav-2">
+        <li *ngFor="let week of _areas.aod | slice: 0:5">
+          {{ week.action_item_description }}
+        </li>
+      </ul>
+      <h5>
+        <span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+          this.assessmentResults
+        }}</span
+        >:
+      </h5>
+
+      <p class="mb-0">
+        <span [ngClass]="{ 'ta-font': this.languageType === 'ta' }">{{
+          this.subject
+        }}</span
+        >: {{ classDetails.subjectInfo.subject }}
+      </p>
+
+      <ul class="my-nav-3">
+        <li *ngFor="let student of accessedStudentList">
+          {{ student.student_name }} : {{ student.grade }}
+        </li>
+      </ul>
+    </section>
+
+    <!-- SECOND PAGE-->
+
+    <!-- <ion-text color="" class="ion-text-center">
+      <h5>Update from Previous Observation made on : 25th Nov 2019</h5>
+    </ion-text>
+
+ <ion-text color="dark" class="text-italic">
+    <p class="fs-12">Note: Please verify if the following students can be assessed to collect learning outcome data. </p>
+  </ion-text>
+        <section>  
+            <h5>Areas for improvement from previous classroom observation :</h5>  
+            <ul class="my-nav-1">
+              <li>TLM Usage</li>
+              <li>Achievement Chart Usage</li>
+              <li>Notebook Verification</li>
+            </ul>
+          </section>
+
+          <section>  
+              <p class="text-success">Congratulate the teacher on:</p>  
+              <ul>
+                <li> TLM Usage</li>
+              </ul>
+              <ion-text color="dark" class="text-italic">
+                  <p class="fs-12"> Note : Teacher has worked on the following from the previous observation</p>
+                </ion-text>
+                <p class="text-danger"> Kindly encourage focus on:</p>  
+                <ul>
+                    <li>Achievement Chart Usage</li>
+                  </ul>
+                  <ion-text color="dark" class="text-italic">
+                      <p class="fs-12">Note : Teacher has not worked on the following from the previous observation</p>
+                    </ion-text>
+            </section> -->
+
+    <!-- THIRD PAGE-->
+    <!-- 
+  <ion-text color="" class="ion-text-center text-success">
+      <h1><b>Congratulations</b></h1>
+    </ion-text>
+        <section>  
+            <ion-text color="" class="ion-text-center">
+            <h2 class="text-muted">You have now successfully completed classroom observation at :</h2>
+              
+                    <h1><b> CPS THIRUVANMIYUR  <br>CLASS 1 <br>Ms. T. DEVAKI
+                    </b></h1>
+                  </ion-text>
+          </section> -->
+  </div>
+</ion-content>
+
+<ion-footer style="height: 50px;">
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button class="btn-back" (click)="goBack()">
+        <ion-label
+          [ngClass]="{
+            'ta-font': this.languageType === 'ta',
+            'fs-16': this.languageType === 'ta'
+          }"
+          >{{ this.back }}</ion-label
+        >
+      </ion-tab-button>
+      <ion-tab-button class="btn-next" (click)="goToNextPage()">
+        <ion-label
+          [ngClass]="{
+            'ta-font': this.languageType === 'ta',
+            'fs-16': this.languageType === 'ta'
+          }"
+          >{{ this.next }}</ion-label
+        >
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+  <!-- <ion-button size="large">Large</ion-button>
+      <ion-button size="large">Large1</ion-button> -->
+
+  <!-- <ion-text ><p style="text-align: center;color:white;font-size: 25px;line-height: 3px;">Next</p></ion-text> -->
+</ion-footer>
+
+<!-- <ion-footer style="height:50px;background-color: #2D9CDB;">
+      <ion-tabs>
+        <ion-tab-bar slot="bottom">
+          <ion-tab-button  class="btn-next done" [routerLink]="['/page-route/attendance/student-data']">
+            <ion-label>NEXT</ion-label>
+          </ion-tab-button>
+        </ion-tab-bar>
+      </ion-tabs>
+    </ion-footer> -->

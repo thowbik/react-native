@@ -1,0 +1,70 @@
+
+
+$white-color: #fff;
+$height100: 100%;
+
+//  ion-content{
+//     --background-image:  url("../../assets/img/login_bg.jpg") no-repeat center center / cover;
+//     --background-repeat: no-repeat;
+//     --background-size: contain;
+//     --background-position: center;
+//  }
+// ion-content{
+//     // --background: url(http://10.100.176.52:8100/appBg.png) !important;
+//     // --background: url('../../../assets/login_bg.jpg');
+//     // background: url('../../../assets/login_bg.jpg');
+//     // --background-repeat: no-repeat;
+    
+//   }
+
+ion-grid {
+    width:100%;
+    height: $height100;
+    // background: #dfdfdf;
+}
+ion-item{
+    // background:#ffffff59 !important;
+    --background: none; 
+}
+.card_login{
+    --color:white;
+    background:#ffffff59;
+}
+.login_button{
+    text-transform: none;
+      border-radius: 3px !important;
+}
+ion-row {
+    height: $height100;
+}
+.logo {
+    width: 35%;
+    height: auto;
+    margin: 0 auto;
+    // padding-top: 50px;
+  }
+ion-col {
+    border: 1px solid #488aff;
+    // background: $white-color;
+}
+ion-button {
+    font-weight: 300;
+}
+@media (min-width: 240px) and (max-width: 768px) {
+    ion-grid {
+        background: url('../../assets/img/login.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        // background-size: contain;
+        background-position: center;
+    }
+    ion-col {
+        border: none;
+    }
+}
+.label-floating.sc-ion-label-md-h{
+    color:#fff;
+}
+.label{
+    color:$white-color
+}

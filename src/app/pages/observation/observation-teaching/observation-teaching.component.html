@@ -1,0 +1,92 @@
+<ion-header>
+    <ion-toolbar class="pale-nave_blue">
+      <ion-grid>
+          <ion-row>
+            <ion-col>
+                <ion-buttons slot="">
+                    <ion-menu-button></ion-menu-button>
+                  </ion-buttons>
+            </ion-col>
+            <ion-col class="">
+                <ion-title class="ion-text-center fs-16" [ngClass]="{'ta-font': this.languageType === 'ta'}"><b>{{ this.classroomObservation }}</b>
+                </ion-title></ion-col>
+            <ion-col>
+                <app-notification></app-notification>
+              </ion-col>
+          </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+      <app-progress [progress]="28"></app-progress>
+
+      <!-- <ion-progress-bar value="0.5"></ion-progress-bar> -->
+      <!-- <ion-card (click)="expandItem(item)" *ngFor="let item of items">
+        <ion-card-header>
+          <ion-card-title>My Neighbor Totoro</ion-card-title>
+        </ion-card-header>
+    
+        <ion-card-content>
+          <app-expandable expandHeight="100px" [expanded]="item.expanded">
+            <p>
+              Hello there.
+            </p>
+            <p>
+              Hello there.
+            </p>
+            <p>
+              Hello there.
+            </p>
+            <p>
+              Hello there.
+            </p>
+            <p>
+              Hello there.
+            </p>
+            <p>
+              Hello there.
+            </p>
+          </app-expandable>
+        </ion-card-content>
+      </ion-card> -->
+  
+   
+    <!-- SECOND PAGE-->
+  
+    <section class="p-0 h-100">  
+      <div
+          class="content-wrapper h-100">
+      <p class="fs-16 mb-0"><span [ngClass]="{'ta-font': this.languageType === 'ta'}">{{this.standardInfo}}</span> :</p>
+     <ion-list lines="none" class="bg-transparent">
+        <ion-radio-group [(ngModel)]="classSelect">
+      <ion-item class="bg-transparent" *ngFor="let standard of selectedClass">
+         <ion-label >{{standard.class_id}}</ion-label>
+         <ion-radio color="favorite" slot="start" (ionSelect)="radioChecked(standard)" value={{standard.class_id}} ></ion-radio>
+       </ion-item>
+     
+      </ion-radio-group>
+       </ion-list>
+     
+      </div>
+  </section>
+  
+  
+     
+  
+    </ion-content>
+  
+    <ion-footer style="height:50px;background-color: #2D9CDB;">
+        <ion-tabs>
+          <ion-tab-bar slot="bottom">
+            <ion-tab-button  class="btn-back" [routerLink]="['/page-route/attendance/student-attendance']">
+              <ion-label  [ngClass]="{'ta-font': this.languageType === 'ta','fs-16': this.languageType === 'ta'}">{{this.back}}</ion-label>
+            </ion-tab-button>
+            <ion-tab-button  class="btn-next" (click)="goToMethodolgyQuestions()">
+              <ion-label  [ngClass]="{'ta-font': this.languageType === 'ta','fs-16': this.languageType === 'ta'}">{{this.next}}</ion-label>
+            </ion-tab-button>
+          </ion-tab-bar>
+        </ion-tabs>
+      </ion-footer>
+  
+  
+  
